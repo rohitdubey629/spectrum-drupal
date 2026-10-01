@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * Search bar — molecule (SDC: spectrum:search-bar).
+ *
+ * Props:
+ * - id: element ID, defaults to "search-bar".
+ * - action: form action, defaults to "/search/node" (Drupal core search page).
+ * - param: query parameter name, defaults to "keys".
+ * - placeholder: input placeholder.
+ *
+ * Built from the Icon button atom (submit + close) and the Svg icon atom.
+ * Opened/closed by masthead.js (data-hook="search-open" / "search-close").
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ id: id, action: action, param: param, placeholder: placeholder }) }} #}
+
+{% set search_id = id|default('search-bar') %}
+
+<div class="search-bar" id="{{ search_id }}" hidden data-search-bar>
+  <form class="search-bar__form" action="{{ action|default('/search/node') }}" method="get" role="search">
+    <label class="search-bar__label" for="{{ search_id }}-input">{{ placeholder|default('Search') }}</label>
+    <input class="search-bar__input" id="{{ search_id }}-input" type="search" name="{{ param|default('keys') }}" placeholder="{{ placeholder|default('Search') }}" autocomplete="off">
+    <button class="search-bar__submit" type="submit">
+      {% include 'spectrum:svg-icon' with { name: 'search', size: 20 } only %}
+      <span class="search-bar__label">Search</span>
+    </button>
+    {% include 'spectrum:icon-button' with {
+      icon: 'close',
+      label: 'Close search',
+      hook: 'search-close',
+    } only %}
+  </form>
+</div>

@@ -1,0 +1,44 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: News card
+group: Molecules
+status: stable
+description: News teaser card, as in "Latest News" on spectrumtech.com — image with a red tag, date, title (max 3 lines) and an arrow; the whole card is one link and turns red on hover.
+props:
+  type: object
+  required: [title, url]
+  properties:
+    title:
+      type: string
+      title: Title
+      examples: ['Spectrum Technologies Supports NASA Artemis II Mission']
+    url:
+      type: string
+      title: URL
+      examples: ['/news-and-events/spectrum-technologies-supports-nasa-artemis-ii-mission']
+    date:
+      type: string
+      title: Date
+      description: Already formatted, e.g. "02 April 2026".
+      examples: ['02 April 2026']
+    datetime:
+      type: string
+      title: Machine-readable date
+      description: ISO date for the <time> element, e.g. "2026-04-02".
+      examples: ['2026-04-02']
+    tag:
+      type: string
+      title: Tag
+      description: Shown on the image (Badge atom). Empty = none.
+      examples: [news]
+    image_url:
+      type: string
+      title: Image URL
+      examples: ['/assets/images/news/spectrum-technologies-supports-nasa-artemis-ii-mission.jpg']
+    image_alt:
+      type: string
+      title: Image alt text
+    title_tag:
+      type: string
+      title: Title tag
+      enum: [h3, h4, h5]
+      default: h3

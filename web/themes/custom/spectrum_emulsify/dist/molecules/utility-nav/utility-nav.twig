@@ -1,0 +1,36 @@
+{#
+/**
+ * @file
+ * Utility nav — molecule (SDC: spectrum_emulsify:utility-nav).
+ *
+ * Props:
+ * - label: aria-label of the <nav>, defaults to "Utility".
+ * - items: list of { title, url, icon }. icon is optional (see icon-link).
+ *
+ * Used by: templates/navigation/menu--header-utility.html.twig
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ label: label, items: items }) }} #}
+
+{% if items %}
+  <nav class="utility-nav" aria-label="{{ label|default('Utility') }}">
+    <ul class="utility-nav__list">
+      {% for item in items %}
+        <li class="utility-nav__item">
+          {#
+            Include by SDC ID first (Drupal: attaches the component's CSS/JS and checks
+            its props). The namespace path after it is only used by Storybook, which
+            cannot resolve SDC IDs inside Compound's atomic folders.
+          #}
+          {% include ['spectrum_emulsify:icon-link', '@atoms/icon-link/icon-link.twig'] with {
+            url: item.url,
+            label: item.title,
+            icon: item.icon|default(''),
+            show_label: false,
+          } only %}
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}

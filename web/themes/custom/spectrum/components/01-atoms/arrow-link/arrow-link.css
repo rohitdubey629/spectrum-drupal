@@ -1,0 +1,30 @@
+/* Arrow link (atom). Values taken from spectrumtech.com: 20px bold red,
+   6px before the arrow, 12px vertical padding; the arrow slides 8px on
+   hover. */
+.arrow-link {
+  display: inline-flex;
+  gap: 6px;
+  align-items: flex-start;
+  padding: 12px 0;
+  color: var(--spectrum-accent, #e00034);
+  font-family: var(--spectrum-font, Arial, Helvetica, sans-serif);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.arrow-link:hover,
+.arrow-link:focus-visible {
+  color: var(--spectrum-accent, #e00034);
+  text-decoration: none;
+}
+
+.arrow-link__icon {
+  transition: transform 0.3s ease;
+}
+
+.arrow-link:hover .arrow-link__icon {
+  transform: translateX(8px);
+}

@@ -1,0 +1,42 @@
+{#
+/**
+ * @file
+ * Mega menu column — molecule (SDC: spectrum_emulsify:mega-menu-column).
+ *
+ * Props:
+ * - heading: column heading (menu level 2). Optional.
+ * - heading_url: makes the heading a link. Optional.
+ * - links: list of { title, url } (menu level 3).
+ *
+ * Each link is rendered with the Compound link atom (@atoms/links/link).
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ heading: heading, heading_url: heading_url, links: links }) }} #}
+
+<div class="mega-menu-column">
+  {% if heading %}
+    <p class="mega-menu-column__heading">
+      {% if heading_url %}
+        <a class="mega-menu-column__heading-link" href="{{ heading_url }}">{{ heading }}</a>
+      {% else %}
+        {{ heading }}
+      {% endif %}
+    </p>
+  {% endif %}
+
+  {% if links %}
+    <ul class="mega-menu-column__list">
+      {% for link in links %}
+        <li class="mega-menu-column__item">
+          {% include '@atoms/links/link/link.twig' with {
+            link_content: link.title,
+            link_url: link.url,
+            link_base_class: 'link',
+            link_blockname: 'mega-menu-column',
+          } only %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>

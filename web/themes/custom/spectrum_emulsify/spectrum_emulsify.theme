@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Render\Element;
+use Drupal\Core\Render\Markup;
+
+/**
+ * Implements hook_preprocess_HOOK() for region templates.
+ *
+ * Header region only (region--header.html.twig): sorts the blocks placed in
+ * the region into the Masthead slots, based on the block plugin:
+ * - Site branding block          → branding
+ * - Main navigation menu block   → navigation
+ * - anything else                → utility
+ *
+ * A region is a theme wrapper, so Drupal has already rendered its blocks and
+ * marked them #printed before this runs. The slots therefore receive each
+ * block's rendered HTML; its CSS/JS and cache data have already bubbled up to
+ * the region. The HTML is in #markup (set both on a fresh render and on a
+ * render cache hit); #children is only set on a fresh render.
+ */
+function spectrum_emulsify_preprocess_region(array &$variables): void {
+  if ($variables['region'] !== 'header') {
+    return;
+  }
+
+  $slots = [
+    'branding' => '',
+    'navigation' => '',
+    'utility' => '',
+  ];
+  $block_storage = \Drupal::entityTypeManager()->getStorage('block');
+
+  foreach (Element::children($variables['elements'], TRUE) as $block_id) {
+    $block = $block_storage->load($block_id);
+    $slot = match ($block?->getPluginId()) {
+      'system_branding_block' => 'branding',
+      'system_menu_block:main' => 'navigation',
+      default => 'utility',
+    };
+    $block_build = $variables['elements'][$block_id];
+    $slots[$slot] .= (string) ($block_build['#markup'] ?? $block_build['#children'] ?? '');
+
+    // Debug: uncomment to see which block went to which slot.
+    // dump([$block_id => $slot]);
+  }
+
+  $variables['masthead_slots'] = array_map(
+    static fn(string $html) => Markup::create($html),
+    $slots,
+  );
+}

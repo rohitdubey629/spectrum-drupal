@@ -1,0 +1,60 @@
+{#
+/**
+ * @file
+ * Media content — organism (SDC: spectrum:media-content).
+ *
+ * Props:
+ * - label: accent label above the heading (Badge atom).
+ * - heading, heading_tag (h2 default | h3).
+ * - cta_text, cta_url: arrow link (Arrow link atom); shown when both are set.
+ * - image_position: left (default) | right.
+ *
+ * Slots:
+ * - media: image, cropped to the 620×402 box.
+ * - body: rich text (Text atom).
+ *
+ * Flow: Layout Builder → "Media content" block →
+ * templates/block/block--block-content--type--media-content.html.twig →
+ * this component.
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ label: label, heading: heading, cta_text: cta_text, cta_url: cta_url, image_position: image_position }) }} #}
+
+<div class="media-content{{ image_position == 'right' ? ' media-content--image-right' : '' }}">
+  <div class="media-content__media">
+    {% block media %}
+      {{ media }}
+    {% endblock %}
+  </div>
+
+  <div class="media-content__content">
+    <div class="media-content__text">
+      {% if label %}
+        {% include 'spectrum:badge' with { text: label } only %}
+      {% endif %}
+
+      {% include 'spectrum:heading' with {
+        text: heading,
+        tag: heading_tag|default('h2'),
+        size: 'h3',
+        color: 'black',
+        modifier: 'media-content__heading',
+      } only %}
+
+      {% if body %}
+        {% include 'spectrum:text' with {
+          tag: 'div',
+          size: 'large',
+          color: 'black',
+          content: body,
+          modifier: 'media-content__body',
+        } only %}
+      {% endif %}
+    </div>
+
+    {% if cta_text and cta_url %}
+      {% include 'spectrum:arrow-link' with { text: cta_text, url: cta_url } only %}
+    {% endif %}
+  </div>
+</div>

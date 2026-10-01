@@ -1,0 +1,194 @@
+// Masthead (organism). Values taken from spectrumtech.com.
+// Colour tokens live here and are shared by every header component via
+// var(--masthead-*). Change them in one place to re-theme the header.
+$masthead-desktop: 992px;
+
+.masthead {
+  --masthead-bg: #fff;
+  --masthead-text: #1e1e1e;
+  --masthead-accent: #e00034;
+  --masthead-border: rgb(0 0 0 / 8%);
+  --masthead-gutter: 16px;
+
+  position: sticky;
+  top: var(--drupal-displace-offset-top, 0);
+  z-index: 99;
+  border-bottom: 1px solid var(--masthead-border);
+  background: var(--masthead-bg);
+  color: var(--masthead-text);
+  font-family: Arial, Helvetica, sans-serif;
+
+  @media (min-width: $masthead-desktop) {
+    --masthead-gutter: 32px;
+  }
+
+  @media (min-width: 1200px) {
+    --masthead-gutter: 60px;
+  }
+}
+
+.masthead__inner {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1440px;
+  height: 72px;
+  margin: 0 auto;
+  padding: 0 var(--masthead-gutter);
+}
+
+// Never let the menus squeeze the logo (Compound sets img { max-width: 100% }).
+// Flex (not block) so no line-height space is added around the logo.
+.masthead__branding,
+.masthead__branding > * {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.masthead__actions {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+// ---------- Mobile: full-screen menu below the header row ----------
+.masthead__menus {
+  position: fixed;
+  inset: calc(var(--drupal-displace-offset-top, 0px) + 73px) 0 0;
+  display: none;
+  flex-direction: column;
+  overflow-y: auto;
+  background: var(--masthead-bg);
+}
+
+.masthead.is-menu-open .masthead__menus {
+  display: flex;
+}
+
+// Page behind the open mobile menu does not scroll.
+:root.masthead-menu-open {
+  overflow: hidden;
+}
+
+// Utility links become a full-width red call-to-action under the menu.
+.masthead__utility {
+  .utility-nav__list {
+    display: block;
+  }
+
+  .icon-link {
+    justify-content: center;
+    width: 100%;
+    padding: 24px 16px;
+    background: var(--masthead-accent);
+    color: #fff;
+  }
+
+  .icon-link__label--hidden {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+  }
+}
+
+// The wrapper takes no space in the row; the bar is positioned against the
+// whole masthead.
+.masthead__search {
+  display: contents;
+}
+
+// Search bar: full width under the header row on mobile.
+.masthead__search .search-bar {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+}
+
+// ---------- Desktop: one 80px row ----------
+@media (min-width: $masthead-desktop) {
+  .masthead__inner {
+    height: 80px;
+  }
+
+  // The wrapper disappears so navigation and utility sit in the row itself:
+  // branding | navigation | search | utility.
+  .masthead__menus,
+  .masthead.is-menu-open .masthead__menus {
+    display: contents;
+  }
+
+  .masthead__branding {
+    order: 1;
+  }
+
+  .masthead__navigation {
+    display: flex;
+    flex: 1;
+    order: 2;
+    justify-content: center;
+  }
+
+  .masthead__actions {
+    order: 3;
+  }
+
+  // min-width keeps the room of spectrumtech.com's language and theme
+  // switchers (not built here), so the menu sits exactly where it does on the
+  // live site. Remove it when those switchers are added.
+  .masthead__utility {
+    order: 4;
+    min-width: 166px;
+
+    .utility-nav__list {
+      display: flex;
+    }
+
+    .icon-link {
+      width: auto;
+      padding: 4px;
+      background: transparent;
+      color: var(--masthead-text);
+    }
+
+    .icon-link__label--hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+  }
+
+  .masthead__toggle {
+    display: none;
+  }
+
+  :root.masthead-menu-open {
+    overflow: visible;
+  }
+
+  // Search bar covers the navigation area, between logo and icons.
+  .masthead__search .search-bar {
+    top: 0;
+    right: calc(var(--masthead-gutter) + 140px);
+    left: calc(var(--masthead-gutter) + 180px);
+    height: 80px;
+  }
+
+  .masthead__search .search-bar__form {
+    padding: 0 16px;
+  }
+}
+
+// Desktop search bar sits inside the 1440px row on wide screens.
+@media (min-width: 1440px) {
+  .masthead__search .search-bar {
+    right: calc((100% - 1440px) / 2 + var(--masthead-gutter) + 140px);
+    left: calc((100% - 1440px) / 2 + var(--masthead-gutter) + 180px);
+  }
+}

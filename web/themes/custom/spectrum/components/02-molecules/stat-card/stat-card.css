@@ -1,0 +1,108 @@
+/* Stat card (molecule). Values taken from spectrumtech.com.
+   400px wide from 768px (set by the Stat cards row), 306px high inner box
+   (auto height below 576px). Hover: red border + red arrow corner. */
+.stat-card {
+  position: relative;
+  border: 1px solid var(--spectrum-border, rgb(0 0 0 / 8%));
+  background-color: #fff;
+}
+
+.stat-card__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 306px;
+  padding: 40px 32px;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+@media (max-width: 575px) {
+  .stat-card__inner {
+    height: auto;
+  }
+}
+
+.stat-card--link:hover .stat-card__inner,
+.stat-card--link:focus-within .stat-card__inner {
+  border-color: var(--spectrum-accent, #e00034);
+}
+
+/* Heading: 36px on every screen (not the mobile type scale), with a
+   80×2px red rule under it. */
+.stat-card .stat-card__heading {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 36px;
+  line-height: 1.2;
+  letter-spacing: 0.02rem;
+}
+
+.stat-card__heading::after {
+  width: 80px;
+  height: 2px;
+  background-color: var(--spectrum-accent, #e00034);
+  content: '';
+}
+
+.stat-card--narrow-heading .stat-card__heading {
+  max-width: 9ch;
+}
+
+/* flex-shrink: 0 — the 3-line text keeps its full height inside the fixed
+   306px box (the Text atom's line clamp uses overflow: hidden). */
+.stat-card .stat-card__text {
+  flex-shrink: 0;
+  letter-spacing: 0.02rem;
+}
+
+/* The link covers the whole card; its text is for screen readers only. */
+.stat-card__link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.stat-card__link:focus-visible {
+  outline: 2px solid var(--spectrum-accent, #e00034);
+  outline-offset: 2px;
+}
+
+.stat-card__link-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Red arrow corner inside the border, shown on hover/focus. */
+.stat-card__corner {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: #fff;
+  background-color: var(--spectrum-accent, #e00034);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.stat-card--link:hover .stat-card__corner,
+.stat-card--link:focus-within .stat-card__corner {
+  opacity: 1;
+}
+
+.stat-card__arrow {
+  transition: transform 0.2s ease;
+}
+
+.stat-card--link:hover .stat-card__arrow {
+  transform: translateX(1px);
+}

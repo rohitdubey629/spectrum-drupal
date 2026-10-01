@@ -1,0 +1,29 @@
+/* Icon button (atom). */
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border: 0;
+  background: transparent;
+  color: var(--masthead-text, #1e1e1e);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.icon-button:hover {
+  opacity: 0.7;
+}
+.icon-button:focus-visible {
+  outline: 2px solid var(--masthead-accent, #e00034);
+  outline-offset: 2px;
+}
+
+/* Visually hidden, still announced by screen readers. */
+.icon-button__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

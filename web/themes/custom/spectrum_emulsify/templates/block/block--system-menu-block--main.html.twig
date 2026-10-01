@@ -1,0 +1,15 @@
+{#
+/**
+ * @file
+ * Main navigation menu block wrapper.
+ *
+ * No <nav> or heading here: the Primary nav organism renders its own <nav>.
+ * The wrapper keeps Drupal's contextual links ("Configure block", "Edit menu").
+ * Menu markup: templates/navigation/menu--main.html.twig
+ */
+#}
+<div{{ attributes.addClass('block-main-menu') }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  {{ content }}
+</div>

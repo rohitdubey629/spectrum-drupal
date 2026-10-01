@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * "CTA banner" block → CTA banner organism (SDC).
+ *
+ * Placed in Block layout → region "Above footer" (every page); can also be
+ * added in Layout Builder. Admin: Content → Blocks → "CTA banner — …".
+ * Fields (Structure → Block types → CTA banner):
+ * - field_hero_media    (Background image) → media slot ("Content" media view mode)
+ * - field_intro_heading (Heading)          → heading
+ * - field_intro_body    (Text)             → body slot
+ * - field_links         (Buttons, multiple) → links: [{ text, url }, …]
+ */
+#}
+{% set block_content = content['#block_content'] %}
+
+{% set links = [] %}
+{% for link in block_content.field_links %}
+  {% set links = links|merge([{ text: link.title|default(''), url: link.url.toString() }]) %}
+{% endfor %}
+
+{# Debug: uncomment to see the values sent to the component. #}
+{# {{ dump({ heading: block_content.field_intro_heading.value, links: links }) }} #}
+
+<div{{ attributes.addClass('block-cta-banner') }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  {% include 'spectrum:cta-banner' with {
+    heading: block_content.field_intro_heading.value|default(''),
+    links: links,
+    media: content.field_hero_media,
+    body: content.field_intro_body,
+  } only %}
+</div>

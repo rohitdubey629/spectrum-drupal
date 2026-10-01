@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Stat cards — organism (SDC: spectrum:stat-cards).
+ *
+ * Props:
+ * - items: list of Stat card props { heading, text, url, narrow_heading }.
+ * - background: grey (default) | white.
+ *
+ * Flow: Layout Builder → "Stat cards" block (one paragraph per card) →
+ * templates/block/block--block-content--type--stat-cards.html.twig → this
+ * component → Stat card molecule (once per item).
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ items: items, background: background }) }} #}
+
+<section class="stat-cards stat-cards--{{ background|default('grey') }}">
+  <div class="stat-cards__row">
+    {% for item in items %}
+      {# Debug: uncomment to inspect one card. #}
+      {# {{ dump(item) }} #}
+      <div class="stat-cards__item">
+        {% include 'spectrum:stat-card' with {
+          heading: item.heading,
+          text: item.text|default(''),
+          url: item.url|default(''),
+          narrow_heading: item.narrow_heading|default(false),
+        } only %}
+      </div>
+    {% endfor %}
+  </div>
+</section>

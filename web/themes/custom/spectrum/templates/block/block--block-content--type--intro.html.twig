@@ -1,0 +1,29 @@
+{#
+/**
+ * @file
+ * "Intro" block → Intro organism (SDC).
+ *
+ * Works for the inline block in Layout Builder and for a reusable block.
+ * Admin: Structure → Block types → Intro.
+ * - field_intro_heading      → heading
+ * - field_intro_body         → body slot (formatted text, rendered by Drupal)
+ * - field_intro_cta          → cta_text (link text) + cta_url
+ * - field_section_background → background (grey | white)
+ */
+#}
+{% set block_content = content['#block_content'] %}
+
+{# Debug: uncomment to see the values sent to the component. #}
+{# {{ dump({ heading: block_content.field_intro_heading.value, cta: block_content.field_intro_cta.uri, cta_text: block_content.field_intro_cta.title, background: block_content.field_section_background.value }) }} #}
+
+<div{{ attributes.addClass('block-intro') }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  {% include 'spectrum:intro' with {
+    heading: block_content.field_intro_heading.value|default(''),
+    cta_text: block_content.field_intro_cta.title|default(''),
+    cta_url: block_content.field_intro_cta.isEmpty() ? '' : block_content.field_intro_cta.0.url.toString(),
+    background: block_content.field_section_background.value|default('grey'),
+    body: content.field_intro_body,
+  } only %}
+</div>

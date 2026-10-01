@@ -1,0 +1,77 @@
+{#
+/**
+ * @file
+ * Carousel — organism (SDC: spectrum:carousel).
+ *
+ * Props:
+ * - heading, subheading: centred title above the slides (Heading/Text atoms).
+ * - label: accessible name, defaults to the heading.
+ * - interval: autoplay time per slide in ms, defaults to 10000; 0 = off.
+ * - slides: list of Carousel slide props.
+ *
+ * Flow: Industry content → View "Industries" (Carousel block) → Layout
+ * Builder → templates/views/views-view--industries--carousel.html.twig →
+ * this component → Carousel slide molecule (once per slide).
+ * Behavior: carousel.js (fade, autoplay, play/pause, dots).
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ heading: heading, subheading: subheading, interval: interval, slides: slides }) }} #}
+
+{% set interval = interval is defined and interval is not null ? interval : 10000 %}
+
+<section class="carousel" aria-roledescription="carousel" aria-label="{{ label|default(heading)|default('Carousel') }}" data-carousel data-interval="{{ interval }}">
+  {% if heading or subheading %}
+    <div class="carousel__header">
+      {% if heading %}
+        {% include 'spectrum:heading' with {
+          text: heading,
+          tag: 'h2',
+          size: 'h3',
+          align: 'center',
+          modifier: 'carousel__heading',
+        } only %}
+      {% endif %}
+      {% if subheading %}
+        {% include 'spectrum:text' with {
+          text: subheading,
+          size: 'large',
+          align: 'center',
+        } only %}
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="carousel__viewport">
+    <div class="carousel__track">
+      {% for slide in slides %}
+        {# Debug: uncomment to inspect one slide. #}
+        {# {{ dump(slide) }} #}
+        <div class="carousel__item{{ loop.first ? ' is-active' : '' }}" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ slides|length }}" data-carousel-slide{{ loop.first ? '' : ' inert' }}>
+          {% include 'spectrum:carousel-slide' with {
+            heading: slide.heading,
+            text: slide.text|default(''),
+            image_url: slide.image_url|default(''),
+            image_alt: slide.image_alt|default(''),
+            cta_text: slide.cta_text|default(''),
+            cta_url: slide.cta_url|default(''),
+          } only %}
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if slides|length > 1 %}
+      <div class="carousel__controls">
+        <button class="carousel__play" type="button" aria-label="Pause autoplay" data-carousel-play>
+          {% include 'spectrum:svg-icon' with { name: 'pause', size: 12, modifier: 'carousel__icon-pause' } only %}
+          {% include 'spectrum:svg-icon' with { name: 'play', size: 12, modifier: 'carousel__icon-play' } only %}
+        </button>
+        <div class="carousel__dots">
+          {% for slide in slides %}
+            <button class="carousel__dot{{ loop.first ? ' is-active' : '' }}" type="button" aria-label="Go to slide {{ loop.index }}: {{ slide.heading }}"{{ loop.first ? ' aria-current="true"' : '' }} data-carousel-dot="{{ loop.index0 }}"></button>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>

@@ -1,0 +1,41 @@
+{#
+/**
+ * @file
+ * "Stat cards" block → Stat cards organism (SDC).
+ *
+ * Works for the inline block in Layout Builder and for a reusable block.
+ * Admin: Structure → Block types → Stat cards. Each card is a "Stat card"
+ * paragraph (Structure → Paragraph types → Stat card):
+ * - field_stat_heading → heading
+ * - field_stat_text    → text
+ * - field_stat_link    → url (whole card clickable)
+ * - field_stat_narrow  → narrow_heading
+ * Block field field_section_background → background (grey | white).
+ */
+#}
+{% set block_content = content['#block_content'] %}
+
+{% set items = [] %}
+{% for card in block_content.field_stat_cards %}
+  {% set paragraph = card.entity %}
+  {% if paragraph %}
+    {% set items = items|merge([{
+      heading: paragraph.field_stat_heading.value|default(''),
+      text: paragraph.field_stat_text.value|default(''),
+      url: paragraph.field_stat_link.isEmpty() ? '' : paragraph.field_stat_link.0.url.toString(),
+      narrow_heading: paragraph.field_stat_narrow.value ? true : false,
+    }]) %}
+  {% endif %}
+{% endfor %}
+
+{# Debug: uncomment to see the cards sent to the component. #}
+{# {{ dump(items) }} #}
+
+<div{{ attributes.addClass('block-stat-cards') }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  {% include 'spectrum:stat-cards' with {
+    items: items,
+    background: block_content.field_section_background.value|default('grey'),
+  } only %}
+</div>

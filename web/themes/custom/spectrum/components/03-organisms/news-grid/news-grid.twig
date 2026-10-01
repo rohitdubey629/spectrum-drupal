@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * News grid — organism (SDC: spectrum:news-grid).
+ *
+ * Props:
+ * - heading: section heading (h2, Heading atom).
+ * - items: list of News card props.
+ *
+ * Flow: News content → View "Latest news" (block) → Layout Builder →
+ * templates/views/views-view--latest-news--block.html.twig → this component
+ * → News card molecule (once per item).
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ heading: heading, items: items }) }} #}
+
+<section class="news-grid">
+  {% if heading %}
+    {% include 'spectrum:heading' with {
+      text: heading,
+      tag: 'h2',
+      size: 'h3',
+      color: 'black',
+      modifier: 'news-grid__heading',
+    } only %}
+  {% endif %}
+
+  <div class="news-grid__items">
+    {% for item in items %}
+      {# Debug: uncomment to inspect one card. #}
+      {# {{ dump(item) }} #}
+      {% include 'spectrum:news-card' with {
+        title: item.title,
+        url: item.url,
+        date: item.date|default(''),
+        datetime: item.datetime|default(''),
+        tag: item.tag|default(''),
+        image_url: item.image_url|default(''),
+        image_alt: item.image_alt|default(''),
+        title_tag: heading ? 'h3' : 'h2',
+      } only %}
+    {% endfor %}
+  </div>
+</section>

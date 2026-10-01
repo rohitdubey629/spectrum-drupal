@@ -1,0 +1,21 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Menu toggle
+group: Atoms
+status: stable
+description: Mobile hamburger button. Shows a "menu" icon when closed and a "close" icon when open (aria-expanded). The Masthead organism wires up the behavior.
+props:
+  type: object
+  properties:
+    label:
+      type: string
+      title: Accessible label
+      examples: ['Menu']
+    controls:
+      type: string
+      title: Controlled element ID
+      description: ID of the element this button shows/hides (aria-controls).
+      examples: ['masthead-menus']
+libraryOverrides:
+  css:
+    component:
+      ../../../dist/css/components/01-atoms/menu-toggle/menu-toggle.css: {}

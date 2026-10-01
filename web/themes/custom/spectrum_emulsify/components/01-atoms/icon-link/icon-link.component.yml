@@ -1,0 +1,30 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Icon link
+group: Atoms
+status: stable
+description: Link with an SVG icon (e.g. the Contact mail icon). The label is visually hidden when an icon is shown, but still read by screen readers.
+props:
+  type: object
+  properties:
+    url:
+      type: string
+      title: URL
+      examples: ['/contact-us']
+    label:
+      type: string
+      title: Label
+      examples: ['Contact Us']
+    icon:
+      type: string
+      title: Icon
+      description: A Svg icon name. Empty = plain text link.
+      enum: ['', mail, search]
+      examples: [mail]
+    show_label:
+      type: boolean
+      title: Show label next to the icon
+      default: false
+libraryOverrides:
+  css:
+    component:
+      ../../../dist/css/components/01-atoms/icon-link/icon-link.css: {}

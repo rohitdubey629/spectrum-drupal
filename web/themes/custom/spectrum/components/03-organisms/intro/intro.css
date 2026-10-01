@@ -1,0 +1,47 @@
+/* Intro (organism). Values taken from spectrumtech.com: 60px section
+   padding, everything centred with a 24px gap, body max 750px. */
+.intro {
+  padding: 60px 0;
+}
+
+.intro--grey {
+  background-color: var(--spectrum-light-grey, #ebebeb);
+}
+
+.intro--white {
+  background-color: #fff;
+}
+
+.intro__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .intro__inner {
+    padding-inline: 16px;
+  }
+}
+
+/* Heading: 36px bold on every screen (h3 step, without the mobile size). */
+.intro .intro__heading {
+  font-size: 36px;
+  line-height: 1.2;
+  letter-spacing: 0.02rem;
+}
+
+.intro .intro__body {
+  max-width: 750px;
+  letter-spacing: 0.02rem;
+}
+
+/* Editor paragraphs: no extra gap, as on the live site (an empty paragraph
+   is used as a spacer there). */
+.intro .intro__body p + p {
+  margin-top: 0;
+}

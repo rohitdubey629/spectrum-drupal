@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * Menu toggle — atom (SDC: spectrum:menu-toggle).
+ *
+ * Props:
+ * - label: accessible name (visually hidden), defaults to "Menu".
+ * - controls: ID of the element this button opens (aria-controls).
+ *
+ * CSS swaps the "menu" and "close" icons with aria-expanded.
+ * Behavior lives in the Masthead organism (masthead.js): [data-menu-toggle].
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ label: label, controls: controls }) }} #}
+
+<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="{{ controls }}" data-menu-toggle>
+  {% include 'spectrum:svg-icon' with { name: 'menu', size: 20, modifier: 'menu-toggle__open' } only %}
+  {% include 'spectrum:svg-icon' with { name: 'close', size: 20, modifier: 'menu-toggle__close' } only %}
+  <span class="menu-toggle__label">{{ label|default('Menu') }}</span>
+</button>

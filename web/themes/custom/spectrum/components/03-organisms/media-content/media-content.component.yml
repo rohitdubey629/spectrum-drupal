@@ -1,0 +1,44 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Media content
+group: Organisms
+status: stable
+description: Two-column image + content block, as the Contract Services / Support / Resources rows on spectrumtech.com — image left or right, red accent label, heading, rich text and an arrow link. One component for every row; image_position switches the side.
+props:
+  type: object
+  required: [heading]
+  properties:
+    label:
+      type: string
+      title: Accent label
+      description: Small red label above the heading (Badge atom). Empty = none.
+      examples: ['Contract Services']
+    heading:
+      type: string
+      title: Heading
+      examples: ['Your Design, Our Expertise - Flexible Production Without the Overhead']
+    heading_tag:
+      type: string
+      title: Heading tag
+      enum: [h2, h3]
+      default: h2
+    cta_text:
+      type: string
+      title: Link text
+      examples: ['Explore Contract Manufacturing']
+    cta_url:
+      type: string
+      title: Link URL
+      examples: ['/contract-manufacturing']
+    image_position:
+      type: string
+      title: Image position
+      description: Side of the image on wide screens (it is always on top when stacked).
+      enum: [left, right]
+      default: left
+slots:
+  media:
+    title: Media
+    description: The image (Drupal — the media field rendered with the "Content" media view mode). It is cropped to fill a 620×402 box.
+  body:
+    title: Body
+    description: Rich text under the heading.

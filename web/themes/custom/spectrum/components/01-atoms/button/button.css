@@ -1,0 +1,52 @@
+/* Button (atom). Values taken from spectrumtech.com: 16px bold, 2px radius,
+   same on every screen. Hover underlines the text (primary) and slides the
+   arrow 8px. Components can adjust it (e.g. the Hero banner's CTA). */
+.button {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  padding: 16.5px 24px;
+  border: 0;
+  border-radius: 2px;
+  font-family: var(--spectrum-font, Arial, Helvetica, sans-serif);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--spectrum-accent, #e00034);
+}
+
+.button--primary {
+  background-color: var(--spectrum-accent, #e00034);
+  color: #fff;
+}
+
+.button--primary:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.button--light {
+  background-color: #fff;
+  color: var(--spectrum-text-strong, #1e1e1e);
+}
+
+.button--light:hover {
+  background-color: #dfdfdf;
+  color: var(--spectrum-text-strong, #1e1e1e);
+}
+
+.button__arrow {
+  transition: transform 0.3s ease;
+}
+
+.button:hover .button__arrow {
+  transform: translateX(8px);
+}

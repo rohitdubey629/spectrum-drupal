@@ -1,0 +1,19 @@
+name: Spectrum
+type: theme
+description: 'Spectrum Technologies theme. Every section is a Single Directory Component (components/), organised as atoms, molecules and organisms.'
+core_version_requirement: ^11
+# Standalone theme: no contrib or core base theme (LD-450).
+base theme: false
+package: Custom
+libraries:
+  - spectrum/global
+regions:
+  # Header: one region per Masthead slot (see templates/layout/page.html.twig).
+  header_branding: 'Header: branding'
+  header_navigation: 'Header: navigation'
+  header_utility: 'Header: utility'
+  highlighted: Highlighted
+  content: Content
+  # Site-wide call to action under the content (CTA banner block).
+  above_footer: 'Above footer'
+  footer: Footer

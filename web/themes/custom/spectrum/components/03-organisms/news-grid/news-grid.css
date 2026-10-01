@@ -1,0 +1,48 @@
+/* News grid (organism). Values taken from spectrumtech.com: heading 60px
+   above a grid with 60px gaps; 3 columns from 992px; 80px below the section
+   (60px below 992px). */
+.news-grid {
+  --news-gutter: 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  max-width: 1440px;
+  margin: 0 auto 60px;
+  padding: 0 var(--news-gutter);
+}
+
+/* 36px bold on every screen (h3 step, without the mobile size). */
+.news-grid .news-grid__heading {
+  font-size: 36px;
+  line-height: 1.2;
+  letter-spacing: 0.72px;
+}
+
+.news-grid__items {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 60px;
+}
+
+@media (min-width: 769px) {
+  .news-grid {
+    --news-gutter: 32px;
+  }
+}
+
+@media (min-width: 992px) {
+  .news-grid {
+    margin-bottom: 80px;
+  }
+
+  .news-grid__items {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .news-grid {
+    --news-gutter: 60px;
+  }
+}

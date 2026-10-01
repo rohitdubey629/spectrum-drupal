@@ -1,0 +1,189 @@
+@charset "UTF-8";
+/* Primary nav (organism). Values taken from spectrumtech.com. Mobile first: full-width accordion rows inside the Masthead menu. Desktop (≥ 992px): 80px bar, click-to-open full-width mega menu panels. */
+.primary-nav {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.primary-nav__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.primary-nav__item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.primary-nav__bar {
+  position: relative;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 16px;
+}
+.primary-nav__item--has-panel > .primary-nav__bar {
+  cursor: pointer;
+}
+
+.primary-nav__link {
+  color: var(--masthead-text, #1e1e1e);
+  font-size: 16px;
+  line-height: normal;
+  letter-spacing: 0.32px;
+  text-decoration: none;
+}
+
+.primary-nav__toggle {
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--masthead-text, #1e1e1e);
+  cursor: pointer;
+}
+.primary-nav__toggle:focus-visible {
+  outline: 2px solid var(--masthead-accent, #e00034);
+  outline-offset: 2px;
+}
+
+/* 20px on mobile, 14px on desktop (as on spectrumtech.com). */
+.primary-nav__chevron {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.5s ease-in-out;
+}
+.is-open .primary-nav__chevron {
+  color: var(--masthead-accent, #e00034);
+  transform: rotate(180deg);
+}
+
+.primary-nav__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Mobile panel: red top line, full width. */
+.primary-nav__panel {
+  border-top: 2px solid var(--masthead-accent, #e00034);
+}
+.primary-nav__panel[hidden] {
+  display: none;
+}
+
+.primary-nav__panel-inner {
+  padding: 0 4px;
+}
+
+.primary-nav__explore {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  padding: 20px 20px 16px;
+  color: var(--masthead-accent, #e00034);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0.4px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+.primary-nav__explore:hover, .primary-nav__explore:focus-visible {
+  opacity: 0.8;
+}
+
+/* Arrow only on desktop. (.primary-nav__explore prefix: beats .svg-icon { display: block } whatever the CSS order.) */
+.primary-nav__explore .primary-nav__explore-icon {
+  display: none;
+  transition: transform 0.2s ease;
+}
+.primary-nav__explore:hover .primary-nav__explore .primary-nav__explore-icon {
+  transform: translateX(5px);
+}
+
+@media (min-width: 992px) {
+  .primary-nav__list {
+    display: flex;
+    gap: 12px;
+    height: 80px;
+  }
+  /* Static so the panel is positioned against the whole masthead. */
+  .primary-nav__item {
+    position: static;
+    border-bottom: 0;
+  }
+  .primary-nav__bar {
+    height: 80px;
+    padding: 32px 16px;
+    /* 3px red line under the item: active section, hover and open panel. */
+  }
+  .primary-nav__bar::after {
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 3px;
+    background-color: var(--masthead-accent, #e00034);
+    content: "";
+    opacity: 0;
+  }
+  .is-active > .primary-nav__bar::after {
+    border-radius: 5px;
+    opacity: 1;
+  }
+  .primary-nav__bar:hover, .is-open > .primary-nav__bar {
+    background-color: #f0f0f0;
+  }
+  .primary-nav__bar:hover::after, .is-open > .primary-nav__bar::after {
+    border-radius: 0;
+    opacity: 1;
+  }
+  .primary-nav__link {
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.28px;
+  }
+  .primary-nav__chevron {
+    width: 14px;
+    height: 14px;
+    color: var(--masthead-accent, #e00034);
+  }
+  .primary-nav__panel {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: 3;
+    max-height: 80vh;
+    padding: 16px 0;
+    overflow-y: auto;
+    border-top: 0;
+    background: var(--masthead-bg, #fff);
+    box-shadow: 0 24px 48px 0 rgba(0, 0, 0, 0.16);
+  }
+  .primary-nav__panel-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 var(--masthead-gutter, 60px);
+  }
+  .primary-nav__explore {
+    padding: 0 0 20px;
+    letter-spacing: 1.4px;
+  }
+  .primary-nav__explore .primary-nav__explore-icon {
+    display: block;
+  }
+  /* Four columns per row. */
+  .primary-nav__columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .primary-nav__columns > * {
+    width: calc(25% - 15px);
+  }
+}

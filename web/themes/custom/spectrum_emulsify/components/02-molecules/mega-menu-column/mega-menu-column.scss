@@ -1,0 +1,96 @@
+// Mega menu column (molecule). Values taken from spectrumtech.com.
+// Mobile first (inside the mobile menu), desktop from 992px (inside the panel).
+.mega-menu-column {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.mega-menu-column__heading {
+  margin: 0;
+  padding: 12px 20px;
+  color: var(--masthead-accent, #e00034);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 1.28px;
+
+  @media (min-width: 992px) {
+    padding: 12px 0;
+    font-size: 20px;
+    letter-spacing: 0.4px;
+  }
+}
+
+.mega-menu-column__heading-link {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    opacity: 0.8;
+  }
+}
+
+// Desktop: links wrap at 180px, like spectrumtech.com.
+.mega-menu-column__item {
+  @media (min-width: 992px) {
+    max-width: 180px;
+  }
+}
+
+.mega-menu-column__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0 0 20px;
+  list-style: none;
+
+  @media (min-width: 992px) {
+    padding: 0;
+  }
+}
+
+// Each link has a 2px red bar on its left; hover shifts the text and tints it.
+.mega-menu-column__link {
+  position: relative;
+  display: block;
+  margin-left: 20px;
+  padding: 8px 20px 8px 8px;
+  color: #000;
+  font-size: 14px;
+  line-height: normal;
+  letter-spacing: 0.28px;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    padding-left 0.2s ease;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background-color: var(--masthead-accent, #e00034);
+    content: '';
+  }
+
+  &:hover,
+  &:focus-visible {
+    padding-left: 12px;
+    background-color: #f7f7f7;
+    color: #000;
+  }
+
+  @media (min-width: 992px) {
+    margin-left: 0;
+    padding: 8px 0 8px 20px;
+    letter-spacing: 0.4px;
+
+    &:hover,
+    &:focus-visible {
+      padding-left: 23px;
+    }
+  }
+}

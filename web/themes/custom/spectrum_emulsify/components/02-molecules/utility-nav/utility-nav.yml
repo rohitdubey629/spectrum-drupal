@@ -1,0 +1,7 @@
+# Storybook sample data for the Utility nav molecule.
+# Same shape that templates/navigation/menu--header-utility.html.twig builds from the Drupal menu.
+label: "Utility"
+items:
+  - title: "Contact Us"
+    url: "/contact-us"
+    icon: "mail"

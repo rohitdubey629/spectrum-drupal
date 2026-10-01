@@ -1,0 +1,37 @@
+{#
+/**
+ * @file
+ * "Hero banner" block → Hero banner organism (SDC).
+ *
+ * Works for the inline block in Layout Builder and for a reusable block.
+ * Admin: Structure → Block types → Hero banner (fields below). On a page:
+ * Layout tab → Add block → Create content block → Hero banner.
+ *
+ * Field → component:
+ * - field_hero_heading      → heading
+ * - field_hero_subheading   → subheading
+ * - field_hero_cta          → cta_text (link text) + cta_url
+ * - field_hero_scroll_text  → scroll_text
+ * - field_hero_overlay      → overlay
+ * - field_hero_media        → media slot, rendered with the "Hero" media view
+ *   mode (Structure → Media types → Image/Video → Manage display → Hero).
+ */
+#}
+{% set hero = content['#block_content'] %}
+
+{# Debug: uncomment to see the values sent to the component. #}
+{# {{ dump({ heading: hero.field_hero_heading.value, subheading: hero.field_hero_subheading.value, cta: hero.field_hero_cta.uri, cta_text: hero.field_hero_cta.title, scroll: hero.field_hero_scroll_text.value, overlay: hero.field_hero_overlay.value }) }} #}
+
+<div{{ attributes.addClass('block-hero') }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  {% include 'spectrum:hero-banner' with {
+    heading: hero.field_hero_heading.value|default(''),
+    subheading: hero.field_hero_subheading.value|default(''),
+    cta_text: hero.field_hero_cta.title|default(''),
+    cta_url: hero.field_hero_cta.isEmpty() ? '' : hero.field_hero_cta.0.url.toString(),
+    scroll_text: hero.field_hero_scroll_text.value|default(''),
+    overlay: hero.field_hero_overlay.value ? true : false,
+    media: content.field_hero_media,
+  } only %}
+</div>

@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ * Arrow link — atom (SDC: spectrum:arrow-link).
+ *
+ * Props:
+ * - text: link text.
+ * - url: link target.
+ *
+ * Built from: Svg icon atom (arrow-right).
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ text: text, url: url }) }} #}
+
+<a class="arrow-link" href="{{ url }}">
+  <span class="arrow-link__text">{{ text }}</span>
+  {% include 'spectrum:svg-icon' with { name: 'arrow-right', size: 20, modifier: 'arrow-link__icon' } only %}
+</a>

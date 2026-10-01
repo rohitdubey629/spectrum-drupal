@@ -1,0 +1,110 @@
+/* Media content (organism). Values taken from spectrumtech.com:
+   - ≥ 1406px: image 620×402 + content 620 wide, 80px apart.
+   - 1201–1405px: both max 500px wide, 30px apart, centred.
+   - ≤ 1200px: stacked and centred (image on top), 30px apart.
+   - ≤ 768px: full-width image, 260px high. */
+.media-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  max-width: 1320px;
+  margin: 0 auto;
+  /* Mobile: 31px side space as on the live site (15px block + 16px row). */
+  padding: 12px 31px;
+  font-family: var(--spectrum-font, Arial, Helvetica, sans-serif);
+}
+
+.media-content__media {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+}
+
+/* Drupal wraps the <img> in media/field markup; stretch it all. */
+.media-content__media div,
+.media-content__media article {
+  height: 100%;
+}
+
+.media-content__media img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.media-content__content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 620px;
+}
+
+/* Label, heading and text sit 16px apart (the link 24px below). */
+.media-content__text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Heading: 36px bold on every screen (h3 step, without the mobile size). */
+.media-content .media-content__heading {
+  font-size: 36px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+.media-content .media-content__body {
+  letter-spacing: 0.02em;
+}
+
+.media-content .media-content__body p + p {
+  margin-top: 1em;
+}
+
+@media (min-width: 769px) {
+  .media-content {
+    padding: 12.92px 0;
+  }
+
+  .media-content__media {
+    width: 620px;
+    height: 402px;
+  }
+}
+
+/* Side by side. */
+@media (min-width: 1201px) {
+  .media-content {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .media-content--image-right {
+    flex-direction: row-reverse;
+  }
+
+  .media-content__media,
+  .media-content__content {
+    max-width: 500px;
+  }
+}
+
+@media (min-width: 1406px) {
+  .media-content {
+    gap: 80px;
+    justify-content: flex-start;
+  }
+
+  .media-content__media,
+  .media-content__content {
+    max-width: 620px;
+  }
+}

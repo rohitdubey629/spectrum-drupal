@@ -1,0 +1,39 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Primary nav
+group: Organisms
+status: stable
+description: Main navigation, as on spectrumtech.com. Desktop — a click opens a full-width mega menu panel. Mobile — an accordion inside the Masthead menu. Panels are built from Mega menu column molecules.
+props:
+  type: object
+  properties:
+    id:
+      type: string
+      title: ID
+      description: Prefix for the panel IDs, defaults to "primary-nav".
+    label:
+      type: string
+      title: Accessible label
+      examples: ['Main']
+    items:
+      type: array
+      title: Items
+      description: Menu level 1 — title, url, active, explore_title, explore_url and columns (Mega menu column props).
+      items:
+        type: object
+        properties:
+          title:
+            type: string
+          url:
+            type: string
+          active:
+            type: boolean
+          explore_title:
+            type: string
+          explore_url:
+            type: string
+          columns:
+            type: array
+libraryOverrides:
+  dependencies:
+    - core/drupal
+    - core/once

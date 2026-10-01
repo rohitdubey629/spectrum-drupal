@@ -1,0 +1,43 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Hero banner
+group: Organisms
+status: stable
+description: Full-bleed hero, as on spectrumtech.com — background image or video, red accent line, heading, subtext, CTA button and a "Scroll to Learn More" link (desktop).
+props:
+  type: object
+  properties:
+    heading:
+      type: string
+      title: Heading
+      description: Shown uppercase as the page's H1.
+      examples: ['Setting the standard']
+    subheading:
+      type: string
+      title: Subtext
+      examples: ['in Laser Wire Marking and Stripping']
+    cta_text:
+      type: string
+      title: CTA text
+      examples: ['EXPLORE OUR PRODUCTS']
+    cta_url:
+      type: string
+      title: CTA URL
+      examples: ['/products']
+    scroll_text:
+      type: string
+      title: Scroll link text
+      description: Empty = no scroll link. Scrolls to the section below the hero.
+      examples: ['Scroll to Learn More']
+    overlay:
+      type: boolean
+      title: Dark overlay
+      description: Darkens the left side for bright images. Off for dark videos, as on the live site.
+      default: false
+slots:
+  media:
+    title: Media
+    description: Background image or video (Drupal — the media field rendered with the "Hero" media view mode).
+libraryOverrides:
+  dependencies:
+    - core/drupal
+    - core/once

@@ -1,0 +1,30 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Search bar
+group: Molecules
+status: stable
+description: Site search form (input, red submit icon, close button). Hidden until the Masthead search button opens it.
+props:
+  type: object
+  properties:
+    id:
+      type: string
+      title: ID
+      description: ID of the search bar (the open button points at it), defaults to "search-bar".
+    action:
+      type: string
+      title: Form action
+      description: Search page URL, defaults to Drupal core search "/search/node".
+      examples: ['/search/node']
+    param:
+      type: string
+      title: Query parameter
+      description: Name of the search text parameter, defaults to "keys" (Drupal core search).
+      examples: [keys]
+    placeholder:
+      type: string
+      title: Placeholder
+      examples: ['Search all of Spectrum']
+libraryOverrides:
+  css:
+    component:
+      ../../../dist/css/components/02-molecules/search-bar/search-bar.css: {}

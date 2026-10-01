@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Icon link — atom (SDC: spectrum_emulsify:icon-link).
+ *
+ * Props:
+ * - url: link target.
+ * - label: link text (screen-reader only when an icon is shown).
+ * - icon: Svg icon name (mail | search), or empty for a text link.
+ * - show_label: also show the label next to the icon.
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ url: url, label: label, icon: icon, show_label: show_label }) }} #}
+
+<a class="icon-link{{ icon ? ' icon-link--' ~ icon : '' }}" href="{{ url }}">
+  {% if icon %}
+    {#
+  Include by SDC ID first (Drupal: attaches the component's CSS/JS and checks
+  its props). The namespace path after it is only used by Storybook, which
+  cannot resolve SDC IDs inside Compound's atomic folders.
+#}
+    {% include ['spectrum_emulsify:svg-icon', '@atoms/svg-icon/svg-icon.twig'] with {
+      name: icon,
+      size: 20,
+      modifier: 'icon-link__icon',
+    } only %}
+  {% endif %}
+  <span class="icon-link__label{{ icon and not show_label ? ' icon-link__label--hidden' : '' }}">{{ label }}</span>
+</a>

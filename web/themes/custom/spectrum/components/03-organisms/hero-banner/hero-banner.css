@@ -1,0 +1,164 @@
+/* Hero banner (organism). Values taken from spectrumtech.com.
+   720px high on every screen; text block vertically centred. Mobile first,
+   desktop from 992px. */
+.hero-banner {
+  --hero-gutter: 16px;
+
+  position: relative;
+  height: 720px;
+  overflow: hidden;
+  background-color: #111;
+  color: #fff;
+  font-family: var(--spectrum-font, Arial, Helvetica, sans-serif);
+}
+
+/* Media fills the hero. Drupal wraps the <img>/<video> in field and media
+   markup, so the wrappers are stretched as well. */
+.hero-banner__media {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-banner__media div,
+.hero-banner__media article {
+  height: 100%;
+}
+
+.hero-banner__media img,
+.hero-banner__media video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Optional overlay for bright images (the live site's video is already dark). */
+.hero-banner--overlay::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(90deg, rgb(0 0 0 / 60%) 0%, rgb(0 0 0 / 0%) 75%);
+  content: '';
+}
+
+.hero-banner__body {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  transform: translateY(-50%);
+}
+
+.hero-banner__container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--hero-gutter);
+}
+
+.hero-banner__content {
+  max-width: 335px;
+}
+
+.hero-banner__line {
+  display: block;
+  width: 120px;
+  height: 3px;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  background-color: var(--spectrum-accent, #e00034);
+}
+
+/* Heading and subtext sizes come from the Heading atom (type scale h1/h2).
+   The hero only changes the desktop title (below). */
+.hero-banner__heading,
+.hero-banner__subheading {
+  color: #fff;
+}
+
+.hero-banner__cta {
+  margin-top: 24px;
+  padding-top: 16px;
+}
+
+/* Hero CTA: fixed 48px height; small uppercase text on mobile. */
+.hero-banner__cta .button {
+  height: 48px;
+  padding: 0 24px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+/* Wide screens only (≥ 1025px), centred 40px above the bottom edge. */
+.hero-banner__scroll {
+  display: none;
+}
+
+/* Tablet and desktop (> 768px, the type scale's breakpoint). */
+@media (min-width: 769px) {
+  .hero-banner {
+    --hero-gutter: 32px;
+  }
+
+  .hero-banner__content {
+    max-width: 567px;
+  }
+
+  .hero-banner__line {
+    width: 160px;
+    height: 4px;
+    margin-bottom: 24px;
+    border-radius: 0;
+  }
+
+  /* Hero title: 64px bold instead of the scale's 72px regular h1. */
+  .hero-banner .hero-banner__heading {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-banner__cta {
+    margin-top: 32px;
+  }
+
+  .hero-banner__cta .button {
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: none;
+  }
+}
+
+@media (min-width: 1025px) {
+  .hero-banner__scroll {
+    position: absolute;
+    right: 0;
+    bottom: 40px;
+    left: 0;
+    z-index: 2;
+    display: block;
+    color: #fff;
+    font-size: 14px;
+    line-height: 22.4px;
+    letter-spacing: 0.28px;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .hero-banner__scroll:hover,
+  .hero-banner__scroll:focus-visible {
+    color: #fff;
+    text-decoration: underline;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero-banner {
+    --hero-gutter: 60px;
+  }
+}

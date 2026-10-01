@@ -1,0 +1,17 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Arrow link
+group: Atoms
+status: stable
+description: Red bold text link followed by an arrow that slides on hover (e.g. "Explore Contract Manufacturing →"), as on spectrumtech.com.
+props:
+  type: object
+  required: [text, url]
+  properties:
+    text:
+      type: string
+      title: Text
+      examples: ['Explore Contract Manufacturing']
+    url:
+      type: string
+      title: URL
+      examples: ['/contract-manufacturing']

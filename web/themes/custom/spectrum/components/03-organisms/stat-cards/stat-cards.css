@@ -1,0 +1,39 @@
+/* Stat cards (organism). Values taken from spectrumtech.com: 60px section
+   padding, cards 400px wide with a 60px gap, centred, wrapping. */
+.stat-cards {
+  padding: 60px 0;
+}
+
+.stat-cards--grey {
+  background-color: var(--spectrum-light-grey, #ebebeb);
+}
+
+.stat-cards--white {
+  background-color: #fff;
+}
+
+.stat-cards__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px;
+  justify-content: center;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.stat-cards__item {
+  flex: 1 1 100%;
+}
+
+@media (min-width: 768px) {
+  .stat-cards__item {
+    flex: 0 0 400px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .stat-cards__row {
+    padding: 0;
+  }
+}

@@ -1,0 +1,27 @@
+// Icon link (atom).
+.icon-link {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--masthead-text, #1e1e1e);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    opacity: 0.7;
+  }
+}
+
+// Visually hidden, still announced by screen readers.
+.icon-link__label--hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

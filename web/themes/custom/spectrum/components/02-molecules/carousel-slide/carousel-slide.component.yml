@@ -1,0 +1,39 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Carousel slide
+group: Molecules
+status: stable
+description: One full-bleed slide, as in the Industries carousel on spectrumtech.com — background image, red accent line, heading, 2-line text and a "Learn More" button. Used for every slide of the Carousel organism.
+props:
+  type: object
+  required: [heading]
+  properties:
+    heading:
+      type: string
+      title: Heading
+      examples: ['Aviation']
+    text:
+      type: string
+      title: Text
+      description: Cut after 2 lines.
+      examples: ['The global leader in UV laser wire marking, delivering the safest, most precise identification and processing of aircraft wiring for civil and military fleets worldwide.']
+    image_url:
+      type: string
+      title: Background image URL
+      examples: ['/assets/images/industries/aviation.jpg']
+    image_alt:
+      type: string
+      title: Image alt text
+      description: Empty = decorative image.
+    cta_text:
+      type: string
+      title: Button text
+      examples: ['Learn More']
+    cta_url:
+      type: string
+      title: Button URL
+      examples: ['/industries/aviation']
+    heading_tag:
+      type: string
+      title: Heading tag
+      enum: [h2, h3]
+      default: h3

@@ -1,0 +1,26 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Brand logo
+group: Atoms
+status: stable
+description: Site logo linked to the home page. Shows the site name when no logo is set.
+props:
+  type: object
+  properties:
+    logo_url:
+      type: string
+      title: Logo URL
+      description: Path of the logo image. Empty = show the site name as text.
+      examples: ['/themes/custom/spectrum_emulsify/assets/images/spectrum-logo.svg']
+    site_name:
+      type: string
+      title: Site name
+      description: Used as the image alt text and as the text fallback.
+      examples: ['Spectrum Technologies']
+    home_url:
+      type: string
+      title: Home URL
+      examples: ['/']
+libraryOverrides:
+  css:
+    component:
+      ../../../dist/css/components/01-atoms/brand-logo/brand-logo.css: {}

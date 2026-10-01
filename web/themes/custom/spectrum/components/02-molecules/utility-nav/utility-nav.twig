@@ -1,0 +1,31 @@
+{#
+/**
+ * @file
+ * Utility nav — molecule (SDC: spectrum:utility-nav).
+ *
+ * Props:
+ * - label: aria-label of the <nav>, defaults to "Utility".
+ * - items: list of { title, url, icon }. icon is optional (see icon-link).
+ *
+ * Used by: templates/navigation/menu--header-utility.html.twig
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ label: label, items: items }) }} #}
+
+{% if items %}
+  <nav class="utility-nav" aria-label="{{ label|default('Utility') }}">
+    <ul class="utility-nav__list">
+      {% for item in items %}
+        <li class="utility-nav__item">
+          {% include 'spectrum:icon-link' with {
+            url: item.url,
+            label: item.title,
+            icon: item.icon|default(''),
+            show_label: false,
+          } only %}
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}

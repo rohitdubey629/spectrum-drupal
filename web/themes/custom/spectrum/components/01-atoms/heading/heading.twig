@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * Heading — atom (SDC: spectrum:heading).
+ *
+ * Props:
+ * - text: heading text.
+ * - tag: h1–h6 | p | div | span, defaults to h2 (semantics).
+ * - size: h1–h6 type scale step, defaults to the tag (looks).
+ * - color: black | red | white | dark-blue | dark-grey | light-grey | orange;
+ *   empty inherits.
+ * - weight: regular | bold | black; empty = the size's default.
+ * - uppercase: true/false.
+ * - align: left | center | right.
+ * - modifier: extra CSS class for the parent component.
+ *
+ * Example: {% include 'spectrum:heading' with { text: 'Latest News', tag: 'h2', size: 'h3', align: 'center' } only %}
+ * Sizes come from the --type-* tokens in css/base.css.
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ text: text, tag: tag, size: size, color: color, weight: weight, uppercase: uppercase, align: align, modifier: modifier }) }} #}
+
+{% set heading_tags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] %}
+{% set tag = tag|default('h2') %}
+{% set size = size|default(tag in heading_tags ? tag : 'h2') %}
+
+{% set classes = ['heading', 'heading--' ~ size] %}
+{% if color %}
+  {% set classes = classes|merge(['color--' ~ color]) %}
+{% endif %}
+{% if weight %}
+  {% set classes = classes|merge(['heading--' ~ weight]) %}
+{% endif %}
+{% if uppercase %}
+  {% set classes = classes|merge(['heading--uppercase']) %}
+{% endif %}
+{% if align %}
+  {% set classes = classes|merge(['heading--' ~ align]) %}
+{% endif %}
+{% if modifier %}
+  {% set classes = classes|merge([modifier]) %}
+{% endif %}
+
+<{{ tag }} class="{{ classes|join(' ') }}">{{ text }}</{{ tag }}>

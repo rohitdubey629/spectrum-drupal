@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * View "Latest news", display "Block" → News grid organism (SDC).
+ *
+ * Admin:
+ * - Content → News (title, Image, Summary, News type; "Authored on" is the
+ *   card date). The 3 newest published items are listed.
+ * - Structure → Views → Latest news: the view title is the section heading.
+ * - Layout Builder: Add block → Lists (Views) → "Latest news".
+ *
+ * Each result row (a News node) becomes one card:
+ * - title                       → title
+ * - node URL                    → url
+ * - created ("Authored on")     → date ("01 July 2026") + datetime (ISO)
+ * - field_news_type (term name) → tag
+ * - field_industry_image (media) → image_url + image_alt
+ */
+#}
+{% set items = [] %}
+{% for row in view.result %}
+  {% set news = row._entity %}
+  {% set image = news.field_industry_image.entity.field_media_image|default(null) %}
+  {% set items = items|merge([{
+    title: news.label,
+    url: path('entity.node.canonical', { node: news.id }),
+    date: news.created.value|date('d F Y'),
+    datetime: news.created.value|date('Y-m-d'),
+    tag: news.field_news_type.entity.label|default(''),
+    image_url: image and image.entity ? file_url(image.entity.uri.value) : '',
+    image_alt: image ? image.alt|default('') : '',
+  }]) %}
+{% endfor %}
+
+{# Debug: uncomment to see the cards sent to the component. #}
+{# {{ dump(items) }} #}
+
+<div{{ attributes.addClass('view-latest-news') }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  {% include 'spectrum:news-grid' with {
+    heading: view.getTitle()|default(''),
+    items: items,
+  } only %}
+</div>

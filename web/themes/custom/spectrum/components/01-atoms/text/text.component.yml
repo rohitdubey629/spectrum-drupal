@@ -1,0 +1,49 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Text
+group: Atoms
+status: stable
+description: Reusable paragraph/body text on the spectrumtech.com type scale. Plain text via the "text" prop, or rich content (e.g. a body field) via the "content" slot.
+props:
+  type: object
+  properties:
+    text:
+      type: string
+      title: Text
+      description: Plain text. Ignored when the content slot is filled.
+      examples: ['Pioneering laser wire processing technology since 1989.']
+    tag:
+      type: string
+      title: HTML tag
+      description: Defaults to p. Use div when the content slot contains its own paragraphs.
+      enum: [p, div, span]
+      default: p
+    size:
+      type: string
+      title: Size
+      description: large 20px/1.8 (default, as on spectrumtech.com), medium 16px, small 14px.
+      enum: [large, medium, small]
+      default: large
+    color:
+      type: string
+      title: Colour
+      description: Empty = inherit the surrounding colour.
+      enum: ['', black, red, white, dark-blue, dark-grey, light-grey, orange]
+    weight:
+      type: string
+      title: Weight
+      enum: ['', regular, bold]
+    align:
+      type: string
+      title: Alignment
+      enum: ['', left, center, right]
+    lines:
+      type: integer
+      title: Max lines
+      description: Cut the text after this many lines with an ellipsis (0 = no limit).
+    modifier:
+      type: string
+      title: Extra CSS class
+slots:
+  content:
+    title: Content
+    description: Rich text (HTML), e.g. a formatted body field.

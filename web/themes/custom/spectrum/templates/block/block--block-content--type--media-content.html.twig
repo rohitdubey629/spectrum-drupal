@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * "Media content" block → Media content organism (SDC).
+ *
+ * Works for the inline block in Layout Builder and for a reusable block.
+ * Admin: Structure → Block types → Media content. The fields re-use field
+ * storages of other block types:
+ * - field_hero_media       (Image)          → media slot ("Content" media view mode)
+ * - field_hero_subheading  (Accent label)   → label
+ * - field_intro_heading    (Heading)        → heading
+ * - field_intro_body       (Text)           → body slot
+ * - field_intro_cta        (Link)           → cta_text + cta_url
+ * - field_image_position   (Image position) → image_position (left | right)
+ */
+#}
+{% set block_content = content['#block_content'] %}
+
+{# Debug: uncomment to see the values sent to the component. #}
+{# {{ dump({ label: block_content.field_hero_subheading.value, heading: block_content.field_intro_heading.value, cta: block_content.field_intro_cta.uri, position: block_content.field_image_position.value }) }} #}
+
+<div{{ attributes.addClass('block-media-content') }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  {% include 'spectrum:media-content' with {
+    label: block_content.field_hero_subheading.value|default(''),
+    heading: block_content.field_intro_heading.value|default(''),
+    cta_text: block_content.field_intro_cta.title|default(''),
+    cta_url: block_content.field_intro_cta.isEmpty() ? '' : block_content.field_intro_cta.0.url.toString(),
+    image_position: block_content.field_image_position.value|default('left'),
+    media: content.field_hero_media,
+    body: content.field_intro_body,
+  } only %}
+</div>

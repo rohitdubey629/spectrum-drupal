@@ -1,0 +1,14 @@
+{#
+/**
+ * @file
+ * Header utility menu block wrapper.
+ *
+ * No <nav> or heading here: the Utility nav molecule renders its own <nav>.
+ * Menu markup: templates/navigation/menu--header-utility.html.twig
+ */
+#}
+<div{{ attributes.addClass('block-header-utility') }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  {{ content }}
+</div>

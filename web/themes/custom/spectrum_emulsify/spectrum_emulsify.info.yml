@@ -1,0 +1,28 @@
+type: theme
+'base theme': emulsify
+core_version_requirement: '^11.3 || ^12'
+name: spectrum_emulsify
+description: ''
+package: Emulsify
+screenshot: screenshot.png
+dependencies:
+  - 'drupal:emulsify_tools (^2.2)'
+libraries:
+  - spectrum_emulsify/global
+components:
+  namespaces:
+    atoms: components/01-atoms
+    molecules: components/02-molecules
+    organisms: components/03-organisms
+    templates: components/04-templates
+    pages: components/05-pages
+regions:
+  header: Header
+  content_top: 'Content Top'
+  content: Content
+  content_bottom: 'Content Bottom'
+  footer: Footer
+version: 1.0.0
+project: emulsify
+datestamp: 1785529041
+generator: 'whisk:7.2.1'

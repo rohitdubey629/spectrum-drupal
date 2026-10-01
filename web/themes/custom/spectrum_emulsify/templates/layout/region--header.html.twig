@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Header region → Masthead organism (SDC).
+ *
+ * Blocks placed in the Header region (Block layout) are sorted into the
+ * Masthead slots in spectrum_emulsify_preprocess_region()
+ * (spectrum_emulsify.theme):
+ * - Site branding block          → branding
+ * - Main navigation menu block   → navigation
+ * - anything else (Header utility menu, custom blocks, …) → utility
+ *
+ * So editors can add/remove/reorder header blocks from the admin UI without
+ * touching this file.
+ */
+#}
+{# Debug: uncomment to see the HTML sent to each slot. #}
+{# {{ dump(masthead_slots) }} #}
+
+{% include 'spectrum_emulsify:masthead' with {
+  branding: masthead_slots.branding,
+  utility: masthead_slots.utility,
+  navigation: masthead_slots.navigation,
+} only %}

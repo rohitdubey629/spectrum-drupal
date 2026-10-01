@@ -1,0 +1,28 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Stat cards
+group: Organisms
+status: stable
+description: Row of Stat card molecules (3-up on desktop, stacked on mobile) in a full-width section, as on spectrumtech.com. Any number of cards; the same Stat card component is used for each.
+props:
+  type: object
+  properties:
+    items:
+      type: array
+      title: Cards
+      description: Each item has the Stat card props — heading, text, url, narrow_heading.
+      items:
+        type: object
+        properties:
+          heading:
+            type: string
+          text:
+            type: string
+          url:
+            type: string
+          narrow_heading:
+            type: boolean
+    background:
+      type: string
+      title: Section background
+      enum: [grey, white]
+      default: grey

@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Icon button — atom (SDC: spectrum:icon-button).
+ *
+ * Props:
+ * - icon: Svg icon name (search | close | menu).
+ * - label: accessible name (visually hidden).
+ * - hook: data-hook value used by JavaScript (e.g. "search-open").
+ * - controls: aria-controls value (adds aria-expanded="false").
+ * - modifier: extra CSS class.
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ icon: icon, label: label, hook: hook, controls: controls }) }} #}
+
+<button class="icon-button{{ modifier ? ' ' ~ modifier : '' }}" type="button"
+  {%- if hook %} data-hook="{{ hook }}"{% endif %}
+  {%- if controls %} aria-controls="{{ controls }}" aria-expanded="false"{% endif %}>
+  {% include 'spectrum:svg-icon' with {
+    name: icon,
+    size: 20,
+  } only %}
+  <span class="icon-button__label">{{ label }}</span>
+</button>

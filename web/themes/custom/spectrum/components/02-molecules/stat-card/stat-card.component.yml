@@ -1,0 +1,28 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Stat card
+group: Molecules
+status: stable
+description: One highlight card (e.g. "35+ Years of Innovation"), as on spectrumtech.com — heading with a red rule, 3-line text, whole card clickable with a red arrow corner on hover. Reused for every card in the Stat cards row.
+props:
+  type: object
+  required: [heading]
+  properties:
+    heading:
+      type: string
+      title: Heading
+      examples: ['35+ Years of Innovation']
+    text:
+      type: string
+      title: Text
+      description: Cut after 3 lines.
+      examples: ['Pioneering laser wire processing technology since 1989.']
+    url:
+      type: string
+      title: Link URL
+      description: Makes the whole card a link. Empty = not clickable.
+      examples: ['/about-us']
+    narrow_heading:
+      type: boolean
+      title: Narrow heading
+      description: Wrap the heading at ~9 characters (e.g. "Global / Coverage" on the live site).
+      default: false

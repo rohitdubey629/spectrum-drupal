@@ -1,0 +1,13 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Badge
+group: Atoms
+status: stable
+description: Small red uppercase label (e.g. "Contract Services" above a heading, news tags), as on spectrumtech.com.
+props:
+  type: object
+  required: [text]
+  properties:
+    text:
+      type: string
+      title: Text
+      examples: ['Contract Services']

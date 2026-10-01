@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Icon button — atom (SDC: spectrum_emulsify:icon-button).
+ *
+ * Props:
+ * - icon: Svg icon name (search | close | menu).
+ * - label: accessible name (visually hidden).
+ * - hook: data-hook value used by JavaScript (e.g. "search-open").
+ * - controls: aria-controls value (adds aria-expanded="false").
+ * - modifier: extra CSS class.
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ icon: icon, label: label, hook: hook, controls: controls }) }} #}
+
+<button class="icon-button{{ modifier ? ' ' ~ modifier : '' }}" type="button"
+  {%- if hook %} data-hook="{{ hook }}"{% endif %}
+  {%- if controls %} aria-controls="{{ controls }}" aria-expanded="false"{% endif %}>
+  {#
+  Include by SDC ID first (Drupal: attaches the component's CSS/JS and checks
+  its props). The namespace path after it is only used by Storybook, which
+  cannot resolve SDC IDs inside Compound's atomic folders.
+#}
+  {% include ['spectrum_emulsify:svg-icon', '@atoms/svg-icon/svg-icon.twig'] with {
+    name: icon,
+    size: 20,
+  } only %}
+  <span class="icon-button__label">{{ label }}</span>
+</button>

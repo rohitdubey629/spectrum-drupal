@@ -1,0 +1,53 @@
+{#
+/**
+ * @file
+ * Intro — organism (SDC: spectrum:intro).
+ *
+ * Props:
+ * - heading: section heading.
+ * - heading_tag: h2 (default) | h3 | h4.
+ * - cta_text, cta_url: CTA button (Button atom); shown when both are set.
+ * - background: grey (default) | white.
+ *
+ * Slots:
+ * - body: rich text, centred, max 750px wide (Text atom).
+ *
+ * Flow: Layout Builder → "Intro" block →
+ * templates/block/block--block-content--type--intro.html.twig → this
+ * component → Heading atom + Text atom + Button atom.
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ heading: heading, heading_tag: heading_tag, cta_text: cta_text, cta_url: cta_url, background: background }) }} #}
+
+<section class="intro intro--{{ background|default('grey') }}">
+  <div class="intro__inner">
+    {% include 'spectrum:heading' with {
+      text: heading,
+      tag: heading_tag|default('h2'),
+      size: 'h3',
+      color: 'black',
+      align: 'center',
+      modifier: 'intro__heading',
+    } only %}
+
+    {% if body %}
+      {% include 'spectrum:text' with {
+        tag: 'div',
+        size: 'large',
+        color: 'black',
+        align: 'center',
+        content: body,
+        modifier: 'intro__body',
+      } only %}
+    {% endif %}
+
+    {% if cta_text and cta_url %}
+      {% include 'spectrum:button' with {
+        text: cta_text,
+        url: cta_url,
+        variant: 'primary',
+      } only %}
+    {% endif %}
+  </div>
+</section>

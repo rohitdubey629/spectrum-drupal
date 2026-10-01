@@ -1,0 +1,39 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Masthead
+group: Organisms
+status: stable
+description: Site header, as on spectrumtech.com. Desktop — logo, primary nav, search and utility icons in one 80px row. Mobile — logo, search and menu buttons; the menu opens full screen with the utility links as a red call-to-action at the bottom.
+props:
+  type: object
+  properties:
+    menus_id:
+      type: string
+      title: Menus wrapper ID
+      description: ID of the collapsible mobile menu (used by the Menu toggle), defaults to "masthead-menus".
+    toggle_label:
+      type: string
+      title: Menu toggle label
+      examples: ['Menu']
+    search_action:
+      type: string
+      title: Search page URL
+      description: Defaults to Drupal core search "/search/node". Empty string = no search button.
+      examples: ['/search/node']
+    search_placeholder:
+      type: string
+      title: Search placeholder
+      examples: ['Search all of Spectrum']
+slots:
+  branding:
+    title: Branding
+    description: Logo — the Brand logo atom (region "Header branding", Site branding block).
+  navigation:
+    title: Navigation
+    description: Main menu — the Primary nav organism (region "Header navigation", Main navigation block).
+  utility:
+    title: Utility
+    description: Utility links — the Utility nav molecule (region "Header utility", Header utility menu block) and any other block placed there.
+libraryOverrides:
+  dependencies:
+    - core/drupal
+    - core/once

@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Site branding block → Brand logo atom (SDC).
+ *
+ * Logo: Appearance → Settings (spectrum_emulsify) → Logo image.
+ * Site name: Configuration → Basic site settings.
+ * Block: Block layout → Header → "Site branding" (Configure).
+ * Keep "Site name" checked there: it is used as the logo alt text (the name
+ * is only shown as text when no logo is set).
+ */
+#}
+{# Debug: uncomment to see the values Drupal gives this block. #}
+{# {{ dump({ site_logo: site_logo, site_name: site_name }) }} #}
+
+<div{{ attributes.addClass('block-branding') }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  {% include 'spectrum_emulsify:brand-logo' with {
+    logo_url: site_logo,
+    site_name: '' ~ site_name,
+    home_url: path('<front>'),
+  } only %}
+</div>

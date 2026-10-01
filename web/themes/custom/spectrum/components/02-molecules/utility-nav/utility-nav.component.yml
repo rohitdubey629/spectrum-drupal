@@ -1,0 +1,24 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Utility nav
+group: Molecules
+status: stable
+description: Small top-bar links (Contact Us, …) built from the Icon link atom.
+props:
+  type: object
+  properties:
+    label:
+      type: string
+      title: Accessible label
+      examples: ['Utility']
+    items:
+      type: array
+      title: Items
+      items:
+        type: object
+        properties:
+          title:
+            type: string
+          url:
+            type: string
+          icon:
+            type: string

@@ -1,0 +1,78 @@
+/* Heading (atom). Sizes use the --type-* tokens from css/base.css, which
+   switch to the mobile scale at 768px. */
+.heading {
+  margin: 0;
+  font-family: var(--spectrum-font, Arial, Helvetica, sans-serif);
+  font-style: normal;
+}
+
+.heading--h1 {
+  font-size: var(--type-h1-size);
+  font-weight: var(--type-h1-weight);
+  line-height: var(--type-h1-line);
+  letter-spacing: var(--type-h1-tracking);
+}
+
+.heading--h2 {
+  font-size: var(--type-h2-size);
+  font-weight: var(--type-h2-weight);
+  line-height: var(--type-h2-line);
+  letter-spacing: var(--type-h2-tracking);
+}
+
+.heading--h3 {
+  font-size: var(--type-h3-size);
+  font-weight: var(--type-h3-weight);
+  line-height: var(--type-h3-line);
+  letter-spacing: var(--type-h3-tracking);
+}
+
+.heading--h4 {
+  font-size: var(--type-h4-size);
+  font-weight: var(--type-h4-weight);
+  line-height: var(--type-h4-line);
+  letter-spacing: var(--type-h4-tracking);
+}
+
+.heading--h5 {
+  font-size: var(--type-h5-size);
+  font-weight: var(--type-h5-weight);
+  line-height: var(--type-h5-line);
+  letter-spacing: var(--type-h5-tracking);
+}
+
+.heading--h6 {
+  font-size: var(--type-h6-size);
+  font-weight: var(--type-h6-weight);
+  line-height: var(--type-h6-line);
+  letter-spacing: var(--type-h6-tracking);
+}
+
+/* Modifiers are listed after the sizes so they win over the size defaults. */
+.heading--regular {
+  font-weight: 400;
+}
+
+.heading--bold {
+  font-weight: 700;
+}
+
+.heading--black {
+  font-weight: 900;
+}
+
+.heading--uppercase {
+  text-transform: uppercase;
+}
+
+.heading--left {
+  text-align: left;
+}
+
+.heading--center {
+  text-align: center;
+}
+
+.heading--right {
+  text-align: right;
+}

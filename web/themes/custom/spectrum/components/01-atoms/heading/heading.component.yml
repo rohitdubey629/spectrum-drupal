@@ -1,0 +1,46 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Heading
+group: Atoms
+status: stable
+description: Reusable heading on the spectrumtech.com type scale (H1–H6). The HTML tag (document outline) and the visual size are chosen separately.
+props:
+  type: object
+  required: [text]
+  properties:
+    text:
+      type: string
+      title: Text
+      examples: ['Mark of Excellence']
+    tag:
+      type: string
+      title: HTML tag
+      description: Semantic element, defaults to h2. Use p/div for heading-styled text that is not a heading.
+      enum: [h1, h2, h3, h4, h5, h6, p, div, span]
+      default: h2
+    size:
+      type: string
+      title: Visual size
+      description: Type scale step, defaults to the tag (or h2 for p/div/span).
+      enum: ['', h1, h2, h3, h4, h5, h6]
+    color:
+      type: string
+      title: Colour
+      description: Empty = inherit the surrounding colour.
+      enum: ['', black, red, white, dark-blue, dark-grey, light-grey, orange]
+    weight:
+      type: string
+      title: Weight
+      description: Empty = the size's default weight.
+      enum: ['', regular, bold, black]
+    uppercase:
+      type: boolean
+      title: Uppercase
+      default: false
+    align:
+      type: string
+      title: Alignment
+      enum: ['', left, center, right]
+    modifier:
+      type: string
+      title: Extra CSS class
+      description: For a parent component's own tweaks, e.g. "hero-banner__heading".

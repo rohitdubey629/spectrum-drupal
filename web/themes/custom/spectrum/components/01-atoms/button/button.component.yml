@@ -1,0 +1,28 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Button
+group: Atoms
+status: stable
+description: Call-to-action button/link, as on spectrumtech.com (red, with an arrow that slides on hover). Renders a link when a URL is given, otherwise a button.
+props:
+  type: object
+  required: [text]
+  properties:
+    text:
+      type: string
+      title: Text
+      examples: ['EXPLORE OUR PRODUCTS']
+    url:
+      type: string
+      title: URL
+      description: Empty = <button type="button">.
+      examples: ['/products']
+    variant:
+      type: string
+      title: Variant
+      description: primary = red, light = white (for dark backgrounds next to a primary button).
+      enum: [primary, light]
+      default: primary
+    arrow:
+      type: boolean
+      title: Show arrow
+      default: true

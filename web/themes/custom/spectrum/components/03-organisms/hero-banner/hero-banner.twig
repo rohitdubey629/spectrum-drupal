@@ -1,0 +1,72 @@
+{#
+/**
+ * @file
+ * Hero banner — organism (SDC: spectrum:hero-banner).
+ *
+ * Props:
+ * - heading: H1 text (shown uppercase).
+ * - subheading: text under the heading.
+ * - cta_text, cta_url: CTA button (Button atom); shown when both are set.
+ * - scroll_text: "Scroll to Learn More" link (desktop); empty = hidden.
+ * - overlay: darken the image for text contrast, defaults to false.
+ *
+ * Slots:
+ * - media: background <img> or <video>; it is stretched to cover the hero.
+ *
+ * Flow: Layout Builder → "Hero banner" block →
+ * templates/block/block--block-content--type--hero.html.twig → this component
+ * → Heading atom (title, subtext) + Button atom (CTA).
+ * Behavior: hero-banner.js (smooth scroll to the next section).
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ heading: heading, subheading: subheading, cta_text: cta_text, cta_url: cta_url, scroll_text: scroll_text, overlay: overlay }) }} #}
+
+<section class="hero-banner{{ overlay ? ' hero-banner--overlay' : '' }}" data-hero-banner>
+  <div class="hero-banner__media">
+    {% block media %}
+      {{ media }}
+    {% endblock %}
+  </div>
+
+  <div class="hero-banner__body">
+    <div class="hero-banner__container">
+      <div class="hero-banner__content">
+        <span class="hero-banner__line" aria-hidden="true"></span>
+
+        {% if heading %}
+          {% include 'spectrum:heading' with {
+            text: heading,
+            tag: 'h1',
+            uppercase: true,
+            modifier: 'hero-banner__heading',
+          } only %}
+        {% endif %}
+
+        {# Styled like an h2 (type scale) but it is a tagline, not a heading. #}
+        {% if subheading %}
+          {% include 'spectrum:heading' with {
+            text: subheading,
+            tag: 'p',
+            size: 'h2',
+            modifier: 'hero-banner__subheading',
+          } only %}
+        {% endif %}
+
+        {% if cta_text and cta_url %}
+          <div class="hero-banner__cta">
+            {% include 'spectrum:button' with {
+              text: cta_text,
+              url: cta_url,
+              variant: 'primary',
+            } only %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {% if scroll_text %}
+    <a class="hero-banner__scroll" href="#" data-hero-scroll>{{ scroll_text }}</a>
+  {% endif %}
+</section>

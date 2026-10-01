@@ -1,0 +1,58 @@
+# Spectrum (Drupal 11, drupal/recommended-project, docroot: web/).
+# Composer-managed code is not committed: run `lando composer install`.
+
+# ---------------------------------------------------------------------------
+# Composer dependencies (see composer.json → extra.installer-paths)
+# ---------------------------------------------------------------------------
+/vendor/
+/web/core/
+/web/libraries/
+/web/modules/contrib/
+/web/themes/contrib/
+/web/profiles/contrib/
+/web/drush/contrib/
+# Contrib recipes (keep the folder's README).
+/recipes/*
+!/recipes/README.txt
+
+# ---------------------------------------------------------------------------
+# Site-specific / sensitive files
+# ---------------------------------------------------------------------------
+# settings.php holds the database credentials and hash salt.
+/web/sites/*/settings*.php
+!/web/sites/*/default.settings.php
+/web/sites/*/services*.yml
+!/web/sites/*/default.services.yml
+
+# User-uploaded and generated files (images, CSS/JS aggregates, …).
+/web/sites/*/files/
+/web/sites/*/private/
+/web/sites/simpletest/
+
+# Environment files and local overrides.
+.env
+.env.*
+!.env.example
+.lando.local.yml
+
+# Database dumps.
+*.sql
+*.sql.gz
+*.mysql
+
+# ---------------------------------------------------------------------------
+# Front-end tooling (Storybook in web/themes/custom/*)
+# ---------------------------------------------------------------------------
+node_modules/
+storybook-static/
+debug-storybook.log
+npm-debug.log*
+
+# ---------------------------------------------------------------------------
+# OS / editor files
+# ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+*.log

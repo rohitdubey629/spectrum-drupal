@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * News card — molecule (SDC: spectrum:news-card).
+ *
+ * Props:
+ * - title, url: card title; the whole card links to url.
+ * - date (formatted) + datetime (ISO) for the <time> element.
+ * - tag: red label on the image (Badge atom).
+ * - image_url, image_alt: teaser image (400:259, cropped).
+ * - title_tag: h3 (default, under the grid's h2) | h4 | h5.
+ *
+ * Built from: Badge atom, Svg icon atom.
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ title: title, url: url, date: date, tag: tag, image_url: image_url }) }} #}
+
+{% set title_tag = title_tag|default('h3') %}
+
+<article class="news-card">
+  <div class="news-card__image">
+    {% if image_url %}
+      <img src="{{ image_url }}" alt="{{ image_alt|default('') }}" loading="lazy">
+    {% endif %}
+    {% if tag %}
+      <span class="news-card__tag">
+        {% include 'spectrum:badge' with { text: tag } only %}
+      </span>
+    {% endif %}
+  </div>
+
+  <div class="news-card__content">
+    {% if date %}
+      <time class="news-card__date"{% if datetime %} datetime="{{ datetime }}"{% endif %}>{{ date }}</time>
+    {% endif %}
+    <div class="news-card__title-row">
+      <{{ title_tag }} class="news-card__title">
+        {# The link covers the whole card (see .news-card__link::after). #}
+        <a class="news-card__link" href="{{ url }}">{{ title }}</a>
+      </{{ title_tag }}>
+      {% include 'spectrum:svg-icon' with { name: 'arrow-right', size: 20, modifier: 'news-card__arrow' } only %}
+    </div>
+  </div>
+</article>

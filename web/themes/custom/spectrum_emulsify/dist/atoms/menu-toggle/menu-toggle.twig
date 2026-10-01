@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * Menu toggle — atom (SDC: spectrum_emulsify:menu-toggle).
+ *
+ * Props:
+ * - label: accessible name (visually hidden), defaults to "Menu".
+ * - controls: ID of the element this button opens (aria-controls).
+ *
+ * CSS swaps the "menu" and "close" icons with aria-expanded.
+ * Behavior lives in the Masthead organism (masthead.js): [data-menu-toggle].
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ label: label, controls: controls }) }} #}
+
+<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="{{ controls }}" data-menu-toggle>
+  {#
+  Include by SDC ID first (Drupal: attaches the component's CSS/JS and checks
+  its props). The namespace path after it is only used by Storybook, which
+  cannot resolve SDC IDs inside Compound's atomic folders.
+#}
+  {% include ['spectrum_emulsify:svg-icon', '@atoms/svg-icon/svg-icon.twig'] with { name: 'menu', size: 20, modifier: 'menu-toggle__open' } only %}
+  {% include ['spectrum_emulsify:svg-icon', '@atoms/svg-icon/svg-icon.twig'] with { name: 'close', size: 20, modifier: 'menu-toggle__close' } only %}
+  <span class="menu-toggle__label">{{ label|default('Menu') }}</span>
+</button>

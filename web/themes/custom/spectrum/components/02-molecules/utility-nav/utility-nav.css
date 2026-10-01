@@ -1,0 +1,10 @@
+/* Utility nav (molecule). */
+.utility-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

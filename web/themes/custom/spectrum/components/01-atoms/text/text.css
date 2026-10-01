@@ -1,0 +1,64 @@
+/* Text (atom). Sizes use the --type-text-* tokens from css/base.css. */
+.text {
+  margin: 0;
+  font-family: var(--spectrum-font, Arial, Helvetica, sans-serif);
+  font-weight: 400;
+}
+
+.text--large {
+  font-size: var(--type-text-large-size);
+  line-height: var(--type-text-large-line);
+  letter-spacing: var(--type-text-large-tracking);
+}
+
+.text--medium {
+  font-size: var(--type-text-medium-size);
+  line-height: var(--type-text-medium-line);
+  letter-spacing: var(--type-text-medium-tracking);
+}
+
+.text--small {
+  font-size: var(--type-text-small-size);
+  line-height: var(--type-text-small-line);
+  letter-spacing: var(--type-text-small-tracking);
+}
+
+/* Paragraphs inside rich content keep the size of the Text atom. */
+.text p {
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+}
+
+.text p + p {
+  margin-top: 1em;
+}
+
+.text--regular {
+  font-weight: 400;
+}
+
+.text--bold {
+  font-weight: 700;
+}
+
+.text--left {
+  text-align: left;
+}
+
+.text--center {
+  text-align: center;
+}
+
+.text--right {
+  text-align: right;
+}
+
+/* "lines" prop: cut after N lines with an ellipsis. */
+.text--clamp {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--text-lines, 3);
+  line-clamp: var(--text-lines, 3);
+}

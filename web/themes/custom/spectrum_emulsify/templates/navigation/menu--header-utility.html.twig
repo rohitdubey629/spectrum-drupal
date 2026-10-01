@@ -1,0 +1,39 @@
+{#
+/**
+ * @file
+ * Header utility menu → Utility nav molecule (SDC).
+ *
+ * Admin: Structure → Menus → Header utility (Contact Us, …).
+ * The icon is picked from the link title (see icon_map). Add a title here to
+ * give a new link an icon; links not in the map are shown as text.
+ */
+#}
+{# Debug: uncomment to see the raw Drupal menu items. #}
+{# {{ dump(items) }} #}
+
+{% set icon_map = {
+  'contact us': 'mail',
+  'contact': 'mail',
+  'call us': 'phone',
+  'login': 'user',
+  'my account': 'user',
+  'search': 'search',
+} %}
+
+{% set utility_items = [] %}
+{% for item in items %}
+  {% set title = '' ~ item.title %}
+  {% set utility_items = utility_items|merge([{
+    title: title,
+    url: item.url.toString(),
+    icon: icon_map[title|lower]|default(''),
+  }]) %}
+{% endfor %}
+
+{# Debug: uncomment to see the data sent to the component. #}
+{# {{ dump(utility_items) }} #}
+
+{% include 'spectrum_emulsify:utility-nav' with {
+  items: utility_items,
+  label: 'Utility',
+} only %}

@@ -1,0 +1,48 @@
+{#
+/**
+ * @file
+ * Text — atom (SDC: spectrum:text).
+ *
+ * Props:
+ * - text: plain text (used when the content slot is empty).
+ * - tag: p | div | span, defaults to p (use div for rich content).
+ * - size: large (20px, default) | medium (16px) | small (14px).
+ * - color: black | red | white | dark-blue | dark-grey | light-grey | orange.
+ * - weight: regular | bold.
+ * - align: left | center | right.
+ * - lines: max visible lines, cut with an ellipsis (0 = no limit).
+ * - modifier: extra CSS class for the parent component.
+ *
+ * Slots:
+ * - content: rich text (HTML), e.g. content.body.
+ *
+ * Example: {% include 'spectrum:text' with { text: summary, size: 'large', lines: 3 } only %}
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ text: text, tag: tag, size: size, color: color, weight: weight, align: align, lines: lines, modifier: modifier }) }} #}
+
+{% set tag = tag|default('p') %}
+
+{% set classes = ['text', 'text--' ~ size|default('large')] %}
+{% if color %}
+  {% set classes = classes|merge(['color--' ~ color]) %}
+{% endif %}
+{% if weight %}
+  {% set classes = classes|merge(['text--' ~ weight]) %}
+{% endif %}
+{% if align %}
+  {% set classes = classes|merge(['text--' ~ align]) %}
+{% endif %}
+{% if lines %}
+  {% set classes = classes|merge(['text--clamp']) %}
+{% endif %}
+{% if modifier %}
+  {% set classes = classes|merge([modifier]) %}
+{% endif %}
+
+<{{ tag }} class="{{ classes|join(' ') }}"{% if lines %} style="--text-lines: {{ lines }};"{% endif %}>
+  {%- block content -%}
+    {{ content|default(text) }}
+  {%- endblock -%}
+</{{ tag }}>

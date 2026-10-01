@@ -1,0 +1,1 @@
+Drupal.behaviors.responsiveEmbeddedVideos={attach(e){let t=e.querySelectorAll(`iframe[src*="youtube.com"]`,`iframe[src*="vimeo.com"]`);t&&Array.from(t).forEach(e=>{let t=`${e.getAttribute(`width`)} / ${e.getAttribute(`height`)}`,n=e.parentNode;n.style.aspectRatio=t,e.removeAttribute(`height`),e.removeAttribute(`width`)})}};

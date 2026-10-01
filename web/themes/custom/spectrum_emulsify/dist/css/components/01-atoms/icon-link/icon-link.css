@@ -1,0 +1,1 @@
+.icon-link{color:var(--masthead-text,#1e1e1e);align-items:center;gap:8px;font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:700;text-decoration:none;transition:opacity .2s;display:inline-flex}.icon-link:hover,.icon-link:focus-visible{opacity:.7}.icon-link__label--hidden{clip-path:inset(50%);white-space:nowrap;width:1px;height:1px;position:absolute;overflow:hidden}

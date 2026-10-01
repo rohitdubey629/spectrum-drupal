@@ -1,0 +1,20 @@
+/**
+ * @file
+ * Spacing between blocks placed with Layout Builder (page layout, not part of
+ * any component). Values taken from spectrumtech.com.
+ */
+
+/* Media content rows: 80px apart (20px when stacked), 60px under the last. */
+.layout__region > .block-media-content + .block-media-content {
+  margin-top: 20px;
+}
+
+.layout__region > .block-media-content:last-child {
+  margin-bottom: 60px;
+}
+
+@media (min-width: 1201px) {
+  .layout__region > .block-media-content + .block-media-content {
+    margin-top: 80px;
+  }
+}

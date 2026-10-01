@@ -1,0 +1,27 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: SVG icon
+group: Atoms
+status: stable
+description: Inline SVG icon (Material Symbols shapes used on spectrumtech.com). Colour follows the text colour (currentColor).
+props:
+  type: object
+  required: [name]
+  properties:
+    name:
+      type: string
+      title: Icon name
+      enum: [search, menu, close, chevron-down, arrow-right, mail]
+      examples: [search]
+    size:
+      type: integer
+      title: Size in px
+      description: Width and height, defaults to 20.
+      examples: [20]
+    modifier:
+      type: string
+      title: Extra CSS class
+      description: For example "masthead__search-icon".
+libraryOverrides:
+  css:
+    component:
+      ../../../dist/css/components/01-atoms/svg-icon/svg-icon.css: {}

@@ -1,0 +1,62 @@
+{#
+/**
+ * @file
+ * CTA banner — organism (SDC: spectrum:cta-banner).
+ *
+ * Props:
+ * - heading, heading_tag (h2 default | h3).
+ * - links: list of { text, url } → one Button atom each.
+ *
+ * Slots:
+ * - media: background image (cover).
+ * - body: text under the heading (Text atom).
+ *
+ * Flow: Block layout → region "Above footer" → "CTA banner" block →
+ * templates/block/block--block-content--type--cta-banner.html.twig → this
+ * component. (The same block type can also be added with Layout Builder.)
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ heading: heading, links: links }) }} #}
+
+<section class="cta-banner">
+  <div class="cta-banner__media">
+    {% block media %}
+      {{ media }}
+    {% endblock %}
+  </div>
+
+  <div class="cta-banner__panel">
+    <div class="cta-banner__text">
+      {% include 'spectrum:heading' with {
+        text: heading,
+        tag: heading_tag|default('h2'),
+        size: 'h3',
+        color: 'white',
+        align: 'center',
+        modifier: 'cta-banner__heading',
+      } only %}
+
+      {% if body %}
+        {% include 'spectrum:text' with {
+          tag: 'div',
+          size: 'large',
+          color: 'white',
+          align: 'center',
+          content: body,
+          modifier: 'cta-banner__body',
+        } only %}
+      {% endif %}
+    </div>
+
+    {% if links %}
+      <div class="cta-banner__actions">
+        {% for link in links %}
+          {# Debug: uncomment to inspect one button. #}
+          {# {{ dump(link) }} #}
+          {% include 'spectrum:button' with { text: link.text, url: link.url, variant: 'primary' } only %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>

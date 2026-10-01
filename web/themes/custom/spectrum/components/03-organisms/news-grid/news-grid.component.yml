@@ -1,0 +1,33 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: News grid
+group: Organisms
+status: stable
+description: '"Latest News" section, as on spectrumtech.com — heading and a grid of News card molecules (3 columns from 992px, 1 below).'
+props:
+  type: object
+  properties:
+    heading:
+      type: string
+      title: Heading
+      examples: ['Latest News']
+    items:
+      type: array
+      title: Cards
+      description: Each item has the News card props — title, url, date, datetime, tag, image_url, image_alt.
+      items:
+        type: object
+        properties:
+          title:
+            type: string
+          url:
+            type: string
+          date:
+            type: string
+          datetime:
+            type: string
+          tag:
+            type: string
+          image_url:
+            type: string
+          image_alt:
+            type: string

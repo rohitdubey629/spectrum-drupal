@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Icon link — atom (SDC: spectrum:icon-link).
+ *
+ * Props:
+ * - url: link target.
+ * - label: link text (screen-reader only when an icon is shown).
+ * - icon: Svg icon name (mail | search), or empty for a text link.
+ * - show_label: also show the label next to the icon.
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ url: url, label: label, icon: icon, show_label: show_label }) }} #}
+
+<a class="icon-link{{ icon ? ' icon-link--' ~ icon : '' }}" href="{{ url }}">
+  {% if icon %}
+    {% include 'spectrum:svg-icon' with {
+      name: icon,
+      size: 20,
+      modifier: 'icon-link__icon',
+    } only %}
+  {% endif %}
+  <span class="icon-link__label{{ icon and not show_label ? ' icon-link__label--hidden' : '' }}">{{ label }}</span>
+</a>

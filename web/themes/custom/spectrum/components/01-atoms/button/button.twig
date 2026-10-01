@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Button — atom (SDC: spectrum:button).
+ *
+ * Props:
+ * - text: button text.
+ * - url: link target; empty renders a <button type="button">.
+ * - variant: primary (red, default) | light (white).
+ * - arrow: show the arrow icon, defaults to true.
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ text: text, url: url, variant: variant, arrow: arrow }) }} #}
+
+{% set variant = variant|default('primary') %}
+{% set show_arrow = arrow is not defined or arrow is null ? true : arrow %}
+{% set classes = 'button button--' ~ variant %}
+
+{% if url %}
+  <a class="{{ classes }}" href="{{ url }}">
+{% else %}
+  <button class="{{ classes }}" type="button">
+{% endif %}
+    <span class="button__text">{{ text }}</span>
+    {% if show_arrow %}
+      {% include 'spectrum:svg-icon' with { name: 'arrow-right', size: 20, modifier: 'button__arrow' } only %}
+    {% endif %}
+{% if url %}
+  </a>
+{% else %}
+  </button>
+{% endif %}

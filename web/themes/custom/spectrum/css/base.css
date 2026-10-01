@@ -1,0 +1,210 @@
+/**
+ * @file
+ * Site-wide base styles and design tokens (from spectrumtech.com).
+ * Component styles live next to each component in components/.
+ */
+
+:root {
+  --spectrum-font: Arial, Helvetica, sans-serif;
+  --spectrum-text: #232429;
+  --spectrum-text-strong: #1e1e1e;
+  --spectrum-accent: #e00034;
+  --spectrum-bg: #fff;
+  --spectrum-bg-soft: #f7f7f7;
+  --spectrum-border: rgb(0 0 0 / 8%);
+
+  /* Colour palette (spectrumtech.com). Used by the .color--* classes below. */
+  --spectrum-black: #1e1e1e;
+  --spectrum-red: #e00034;
+  --spectrum-white: #fff;
+  --spectrum-dark-blue: #21314d;
+  --spectrum-dark-grey: #818a8f;
+  --spectrum-light-grey: #ebebeb;
+  --spectrum-orange: #ff6319;
+
+  /* Type scale (spectrumtech.com). Desktop values; mobile (≤ 768px) below.
+     Used by the Heading and Text atoms and by plain h1–h6/p (editor content). */
+  --type-h1-size: 72px;
+  --type-h1-line: 1.2;
+  --type-h1-weight: 400;
+  --type-h1-tracking: 0.5px;
+  --type-h2-size: 48px;
+  --type-h2-line: 1.2;
+  --type-h2-weight: 400;
+  --type-h2-tracking: 0.4px;
+  --type-h3-size: 36px;
+  --type-h3-line: 1.2;
+  --type-h3-weight: 700;
+  --type-h3-tracking: 0.32px;
+  --type-h4-size: 24px;
+  --type-h4-line: 1.2;
+  --type-h4-weight: 700;
+  --type-h4-tracking: 1.4px;
+  --type-h5-size: 16px;
+  --type-h5-line: 1.2;
+  --type-h5-weight: 700;
+  --type-h5-tracking: 0.32px;
+  --type-h6-size: 14px;
+  --type-h6-line: 1.2;
+  --type-h6-weight: 700;
+  --type-h6-tracking: 0.28px;
+  --type-text-large-size: 20px;
+  --type-text-large-line: 1.8;
+  --type-text-large-tracking: 0.32px;
+  --type-text-medium-size: 16px;
+  --type-text-medium-line: 1.5;
+  --type-text-medium-tracking: 0.32px;
+  --type-text-small-size: 14px;
+  --type-text-small-line: 1.6;
+  --type-text-small-tracking: 0.28px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --type-h1-size: 40px;
+    --type-h1-line: 50px;
+    --type-h1-tracking: 0.4px;
+    --type-h2-size: 30px;
+    --type-h2-line: 40px;
+    --type-h2-tracking: 0.2px;
+    --type-h3-size: 24px;
+    --type-h3-line: 28px;
+    --type-h3-tracking: 0.1px;
+    --type-h4-size: 18px;
+    --type-h4-line: 24px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--spectrum-bg);
+  color: var(--spectrum-text);
+  font-family: var(--spectrum-font);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--spectrum-accent);
+}
+
+/* Plain headings and paragraphs (e.g. body field / editor content) follow the
+   same type scale as the Heading and Text atoms. :where() keeps specificity at
+   zero, so any component class wins. */
+:where(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+  font-family: var(--spectrum-font);
+  color: inherit;
+}
+
+:where(h1) {
+  font-size: var(--type-h1-size);
+  font-weight: var(--type-h1-weight);
+  line-height: var(--type-h1-line);
+  letter-spacing: var(--type-h1-tracking);
+}
+
+:where(h2) {
+  font-size: var(--type-h2-size);
+  font-weight: var(--type-h2-weight);
+  line-height: var(--type-h2-line);
+  letter-spacing: var(--type-h2-tracking);
+}
+
+:where(h3) {
+  font-size: var(--type-h3-size);
+  font-weight: var(--type-h3-weight);
+  line-height: var(--type-h3-line);
+  letter-spacing: var(--type-h3-tracking);
+}
+
+:where(h4) {
+  font-size: var(--type-h4-size);
+  font-weight: var(--type-h4-weight);
+  line-height: var(--type-h4-line);
+  letter-spacing: var(--type-h4-tracking);
+}
+
+:where(h5) {
+  font-size: var(--type-h5-size);
+  font-weight: var(--type-h5-weight);
+  line-height: var(--type-h5-line);
+  letter-spacing: var(--type-h5-tracking);
+}
+
+:where(h6) {
+  font-size: var(--type-h6-size);
+  font-weight: var(--type-h6-weight);
+  line-height: var(--type-h6-line);
+  letter-spacing: var(--type-h6-tracking);
+}
+
+:where(p) {
+  margin: 0;
+  font-size: var(--type-text-large-size);
+  line-height: var(--type-text-large-line);
+  letter-spacing: var(--type-text-large-tracking);
+}
+
+/* Colour helpers, shared by the Heading and Text atoms. */
+.color--black {
+  color: var(--spectrum-black);
+}
+
+.color--red {
+  color: var(--spectrum-red);
+}
+
+.color--white {
+  color: var(--spectrum-white);
+}
+
+.color--dark-blue {
+  color: var(--spectrum-dark-blue);
+}
+
+.color--dark-grey {
+  color: var(--spectrum-dark-grey);
+}
+
+.color--light-grey {
+  color: var(--spectrum-light-grey);
+}
+
+.color--orange {
+  color: var(--spectrum-orange);
+}
+
+/* Drupal core helper used by blocks and forms. */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.page-main {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* Landing pages (Layout Builder): sections are full width and set their own
+   spacing. */
+.page-main--full {
+  max-width: none;
+  padding: 0;
+}

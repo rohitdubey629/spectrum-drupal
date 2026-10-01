@@ -1,0 +1,49 @@
+{#
+/**
+ * @file
+ * Stat card — molecule (SDC: spectrum:stat-card).
+ *
+ * Props:
+ * - heading: card title (h3).
+ * - text: short text, cut after 3 lines.
+ * - url: link target; the whole card becomes clickable.
+ * - narrow_heading: wrap the heading at ~9 characters.
+ *
+ * Built from: Heading atom, Text atom, Svg icon atom.
+ * One link per card, stretched over the whole card (labelled with the
+ * heading); the red arrow corner is decoration shown on hover.
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ heading: heading, text: text, url: url, narrow_heading: narrow_heading }) }} #}
+
+<article class="stat-card{{ url ? ' stat-card--link' : '' }}{{ narrow_heading ? ' stat-card--narrow-heading' : '' }}">
+  <div class="stat-card__inner">
+    {% include 'spectrum:heading' with {
+      text: heading,
+      tag: 'h3',
+      size: 'h3',
+      color: 'black',
+      modifier: 'stat-card__heading',
+    } only %}
+
+    {% if text %}
+      {% include 'spectrum:text' with {
+        text: text,
+        size: 'large',
+        color: 'black',
+        lines: 3,
+        modifier: 'stat-card__text',
+      } only %}
+    {% endif %}
+
+    {% if url %}
+      <a class="stat-card__link" href="{{ url }}">
+        <span class="stat-card__link-label">{{ heading }}</span>
+      </a>
+      <span class="stat-card__corner" aria-hidden="true">
+        {% include 'spectrum:svg-icon' with { name: 'arrow-right', size: 20, modifier: 'stat-card__arrow' } only %}
+      </span>
+    {% endif %}
+  </div>
+</article>

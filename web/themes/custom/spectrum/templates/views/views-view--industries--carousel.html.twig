@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * View "Industries", display "Carousel" → Carousel organism (SDC).
+ *
+ * Admin:
+ * - Content → Industry (title, Summary, Image, Order in lists). Published
+ *   industries are listed by "Order in lists", then title.
+ * - Structure → Views → Industries: the view title is the carousel heading,
+ *   the header "Text" is the subheading.
+ * - Layout Builder: Add block → Lists (Views) → "Industries carousel".
+ *
+ * Each result row (an Industry node) becomes one slide:
+ * - title                         → heading
+ * - field_industry_summary        → text
+ * - field_industry_image (media)  → image_url + image_alt
+ * - node URL                      → cta_url ("Learn More")
+ */
+#}
+{% set slides = [] %}
+{% for row in view.result %}
+  {% set industry = row._entity %}
+  {% set image = industry.field_industry_image.entity.field_media_image|default(null) %}
+  {% set slides = slides|merge([{
+    heading: industry.label,
+    text: industry.field_industry_summary.value|default(''),
+    image_url: image and image.entity ? file_url(image.entity.uri.value) : '',
+    image_alt: image ? image.alt|default('') : '',
+    cta_text: 'Learn More'|t,
+    cta_url: path('entity.node.canonical', { node: industry.id }),
+  }]) %}
+{% endfor %}
+
+{# Debug: uncomment to see the slides sent to the component. #}
+{# {{ dump(slides) }} #}
+
+<div{{ attributes.addClass('view-industries-carousel') }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  {% include 'spectrum:carousel' with {
+    heading: view.getTitle()|default(''),
+    subheading: header.area_text_custom['#markup']|default('')|striptags|trim,
+    slides: slides,
+  } only %}
+</div>

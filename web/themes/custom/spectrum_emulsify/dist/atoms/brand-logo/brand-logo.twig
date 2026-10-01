@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Brand logo — atom (SDC: spectrum_emulsify:brand-logo).
+ *
+ * Props:
+ * - logo_url: path of the logo image. Empty → site name is shown as text.
+ * - site_name: alt text of the image / text fallback.
+ * - home_url: link target, defaults to "/".
+ *
+ * Used by: templates/block/block--system-branding-block.html.twig
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ logo_url: logo_url, site_name: site_name, home_url: home_url }) }} #}
+
+<a class="brand-logo" href="{{ home_url|default('/') }}" rel="home">
+  {% if logo_url %}
+    <img class="brand-logo__image" src="{{ logo_url }}" alt="{{ site_name|default('Home') }}" width="161" height="36" fetchpriority="high">
+  {% else %}
+    <span class="brand-logo__text">{{ site_name }}</span>
+  {% endif %}
+</a>

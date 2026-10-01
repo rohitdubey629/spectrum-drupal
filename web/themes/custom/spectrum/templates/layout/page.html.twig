@@ -1,0 +1,38 @@
+{#
+/**
+ * @file
+ * Page layout.
+ *
+ * Header: the three header regions are sent into the Masthead organism's
+ * slots, so editors manage header blocks from Block layout:
+ * - "Header: branding"   → branding   (Site branding block)
+ * - "Header: navigation" → navigation (Main navigation block)
+ * - "Header: utility"    → utility    (Header utility menu block, …)
+ *
+ * Above footer: site-wide call to action (CTA banner block), on every page.
+ *
+ * Available regions: page.header_branding, page.header_navigation,
+ * page.header_utility, page.highlighted, page.content, page.above_footer,
+ * page.footer.
+ */
+#}
+{# Debug: uncomment to see which regions have content on this page. #}
+{# {{ dump(page|keys) }} #}
+
+{% include 'spectrum:masthead' with {
+  branding: page.header_branding,
+  navigation: page.header_navigation,
+  utility: page.header_utility,
+} only %}
+
+{# Landing pages are built with Layout Builder and use full-width sections. #}
+{% set full_width = node.bundle is defined and node.bundle == 'landing_page' %}
+
+<main id="main-content" class="page-main{{ full_width ? ' page-main--full' : '' }}" role="main" tabindex="-1">
+  {{ page.highlighted }}
+  {{ page.content }}
+</main>
+
+{{ page.above_footer }}
+
+{{ page.footer }}

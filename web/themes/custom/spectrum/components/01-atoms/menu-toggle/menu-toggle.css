@@ -1,0 +1,35 @@
+/* Menu toggle (atom). */
+.menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border: 0;
+  background: transparent;
+  color: var(--masthead-text, #1e1e1e);
+  cursor: pointer;
+}
+.menu-toggle:focus-visible {
+  outline: 2px solid var(--masthead-accent, #e00034);
+  outline-offset: 2px;
+}
+
+/* Closed: show the hamburger. Open: show the cross. (.menu-toggle prefix: beats .svg-icon { display: block } whatever the CSS order.) */
+.menu-toggle .menu-toggle__close,
+.menu-toggle[aria-expanded=true] .menu-toggle__open {
+  display: none;
+}
+
+.menu-toggle[aria-expanded=true] .menu-toggle__close {
+  display: block;
+}
+
+/* Visually hidden, still announced by screen readers. */
+.menu-toggle__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

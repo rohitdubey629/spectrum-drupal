@@ -1,0 +1,22 @@
+global:
+  version: VERSION
+  css:
+    base:
+      dist/css/components/00-base/base.css: { minified: true }
+    component:
+      dist/css/components/01-atoms/atoms.css: { minified: true }
+      dist/css/components/02-molecules/molecules.css: { minified: true }
+      dist/css/components/02-molecules/alert/alert.css: { minified: true }
+      dist/css/components/03-organisms/organisms.css: { minified: true }
+    layout:
+      dist/css/components/04-templates/templates.css: { minified: true }
+  js:
+    dist/js/components/01-atoms/tooltip/tooltip.js: { minified: true }
+    dist/js/components/01-atoms/videos/video-embed.js: { minified: true }
+    dist/js/components/02-molecules/accordion/accordion.js: { minified: true }
+    dist/js/components/02-molecules/alert/alert.js: { minified: true }
+    dist/js/components/02-molecules/menus/main-menu/main-menu.js: { minified: true }
+    dist/js/components/02-molecules/tabs/tabs.js: { minified: true }
+  dependencies:
+    - core/drupal
+    - core/once

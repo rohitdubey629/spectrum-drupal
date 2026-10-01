@@ -1,0 +1,88 @@
+{#
+/**
+ * @file
+ * Masthead — organism (SDC: spectrum_emulsify:masthead).
+ *
+ * Props:
+ * - menus_id: ID of the mobile menu wrapper, defaults to "masthead-menus".
+ * - toggle_label: accessible name of the Menu toggle, defaults to "Menu".
+ * - search_action: search page URL, defaults to "/search/node". '' = no search.
+ * - search_placeholder: search input placeholder.
+ *
+ * Slots (Twig blocks, or variables with the same name):
+ * - branding: Brand logo atom.
+ * - navigation: Primary nav organism.
+ * - utility: Utility nav molecule (+ any other Header region blocks).
+ *
+ * Layout (masthead.scss):
+ * - Desktop ≥ 992px: branding | navigation | search button | utility.
+ * - Mobile: branding | search button, menu toggle. The menus wrapper opens as
+ *   a full-screen panel: navigation, then utility as a red CTA.
+ *
+ * Flow: Block layout → Header region → spectrum_emulsify_preprocess_region()
+ * + templates/layout/region--header.html.twig → this component.
+ * Behavior: masthead.js (mobile menu, search bar).
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ menus_id: menus_id, toggle_label: toggle_label, search_action: search_action }) }} #}
+
+{% set menus_id = menus_id|default('masthead-menus') %}
+{% if search_action is not defined or search_action is null %}
+  {% set search_action = '/search/node' %}
+{% endif %}
+
+<header class="masthead" data-masthead>
+  <div class="masthead__inner">
+    <div class="masthead__branding">
+      {% block branding %}
+        {{ branding }}
+      {% endblock %}
+    </div>
+
+    <div class="masthead__menus" id="{{ menus_id }}">
+      <div class="masthead__navigation">
+        {% block navigation %}
+          {{ navigation }}
+        {% endblock %}
+      </div>
+      <div class="masthead__utility">
+        {% block utility %}
+          {{ utility }}
+        {% endblock %}
+      </div>
+    </div>
+
+    <div class="masthead__actions">
+      {% if search_action %}
+        {#
+        Include by SDC ID first (Drupal: attaches the component's CSS/JS and checks
+        its props). The namespace path after it is only used by Storybook, which
+        cannot resolve SDC IDs inside Compound's atomic folders.
+      #}
+        {% include ['spectrum_emulsify:icon-button', '@atoms/icon-button/icon-button.twig'] with {
+          icon: 'search',
+          label: 'Open search',
+          hook: 'search-open',
+          controls: menus_id ~ '-search',
+        } only %}
+      {% endif %}
+      <div class="masthead__toggle">
+        {% include ['spectrum_emulsify:menu-toggle', '@atoms/menu-toggle/menu-toggle.twig'] with {
+          label: toggle_label|default('Menu'),
+          controls: menus_id,
+        } only %}
+      </div>
+    </div>
+
+    {% if search_action %}
+      <div class="masthead__search">
+        {% include ['spectrum_emulsify:search-bar', '@molecules/search-bar/search-bar.twig'] with {
+          id: menus_id ~ '-search',
+          action: search_action,
+          placeholder: search_placeholder|default('Search all of Spectrum'),
+        } only %}
+      </div>
+    {% endif %}
+  </div>
+</header>

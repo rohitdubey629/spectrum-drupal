@@ -1,0 +1,35 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Icon button
+group: Atoms
+status: stable
+description: Icon-only button (search, close, …). The label is for screen readers. JavaScript finds it through the "hook" data attribute.
+props:
+  type: object
+  required: [icon, label]
+  properties:
+    icon:
+      type: string
+      title: Icon
+      description: A Svg icon name.
+      enum: [search, close, menu]
+      examples: [search]
+    label:
+      type: string
+      title: Accessible label
+      examples: ['Open search']
+    hook:
+      type: string
+      title: JS hook
+      description: Rendered as data-hook="…" so a behavior can find the button.
+      examples: ['search-open']
+    controls:
+      type: string
+      title: Controlled element ID
+      description: aria-controls value, when the button shows/hides something.
+    modifier:
+      type: string
+      title: Extra CSS class
+libraryOverrides:
+  css:
+    component:
+      ../../../dist/css/components/01-atoms/icon-button/icon-button.css: {}

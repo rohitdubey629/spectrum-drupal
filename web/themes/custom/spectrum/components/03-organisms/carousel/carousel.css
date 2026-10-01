@@ -1,0 +1,140 @@
+/* Carousel (organism). Values taken from spectrumtech.com: title with 60px
+   top / 40px bottom padding, full-bleed fading slides, play/pause + square
+   dots 60px above the bottom, aligned right. 60px gap below the section. */
+.carousel {
+  --carousel-gutter: 16px;
+
+  margin-bottom: 60px;
+  font-family: var(--spectrum-font, Arial, Helvetica, sans-serif);
+}
+
+.carousel__header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 60px var(--carousel-gutter) 40px;
+  color: var(--spectrum-text, #232429);
+}
+
+/* 36px bold on every screen (h3 step, without the mobile size). */
+.carousel .carousel__heading {
+  font-size: 36px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+.carousel__viewport {
+  position: relative;
+}
+
+/* All slides share one grid cell: the track is as tall as the tallest slide
+   and slides cross-fade (opacity) — no height measuring in JS. */
+.carousel__track {
+  display: grid;
+}
+
+.carousel__item {
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.5s linear,
+    visibility 0.5s linear;
+}
+
+.carousel__item.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.carousel__item > .carousel-slide {
+  height: 100%;
+}
+
+.carousel__controls {
+  position: absolute;
+  right: 0;
+  bottom: 60px;
+  left: 0;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: flex-end;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 45px;
+}
+
+.carousel__play {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.carousel__play .carousel__icon-play,
+.carousel.is-paused .carousel__icon-pause {
+  display: none;
+}
+
+.carousel.is-paused .carousel__play .carousel__icon-play {
+  display: block;
+}
+
+.carousel__dots {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.carousel__dot {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 40%);
+  border-radius: 0;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.carousel__dot:hover,
+.carousel__dot.is-active {
+  background-color: #fff;
+}
+
+.carousel__play:focus-visible,
+.carousel__dot:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel__item {
+    transition: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .carousel {
+    --carousel-gutter: 32px;
+  }
+
+  .carousel__controls {
+    padding: 0 calc(var(--carousel-gutter) + 15px);
+  }
+}
+
+@media (min-width: 1200px) {
+  .carousel {
+    --carousel-gutter: 60px;
+  }
+}

@@ -1,0 +1,85 @@
+{#
+/**
+ * @file
+ * Primary nav — organism (SDC: spectrum:primary-nav).
+ *
+ * Props:
+ * - id: prefix for panel IDs, defaults to "primary-nav".
+ * - label: aria-label of the <nav>, defaults to "Main".
+ * - items: menu level 1, each item:
+ *   - title, url, active (in active trail)
+ *   - explore_title, explore_url: optional "Explore Our … →" link on top of the
+ *     panel (Drupal: the menu link "Description" field).
+ *   - columns: list of Mega menu column props { heading, heading_url, links }.
+ *     An item without columns renders as a plain link.
+ *
+ * Flow: Drupal menu → templates/navigation/menu--main.html.twig (builds
+ * "items") → this component → mega-menu-column.
+ * Behavior: primary-nav.js — like spectrumtech.com, clicking a top item opens
+ * its panel instead of following the link (the Explore link goes there).
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump(items) }} #}
+
+{% set nav_id = id|default('primary-nav') %}
+
+<nav class="primary-nav" id="{{ nav_id }}" aria-label="{{ label|default('Main') }}" data-primary-nav>
+  <ul class="primary-nav__list">
+    {% for item in items %}
+      {% set panel_id = nav_id ~ '-panel-' ~ loop.index %}
+      {% set has_panel = item.columns is not empty %}
+
+      {# Debug: uncomment to inspect one menu item (level 1) and its columns. #}
+      {# {{ dump(item) }} #}
+
+      <li class="primary-nav__item{{ has_panel ? ' primary-nav__item--has-panel' : '' }}{{ item.active ? ' is-active' : '' }}"{{ has_panel ? ' data-primary-nav-item' : '' }}>
+        <div class="primary-nav__bar">
+          {% if item.url %}
+            <a class="primary-nav__link" href="{{ item.url }}">{{ item.title }}</a>
+          {% else %}
+            <span class="primary-nav__link">{{ item.title }}</span>
+          {% endif %}
+
+          {% if has_panel %}
+            <button class="primary-nav__toggle" type="button" aria-expanded="false" aria-controls="{{ panel_id }}" data-primary-nav-toggle>
+              {% include 'spectrum:svg-icon' with {
+                name: 'chevron-down',
+                size: 14,
+                modifier: 'primary-nav__chevron',
+              } only %}
+              <span class="primary-nav__sr-only">{{ item.title }} submenu</span>
+            </button>
+          {% endif %}
+        </div>
+
+        {% if has_panel %}
+          <div class="primary-nav__panel" id="{{ panel_id }}" hidden>
+            <div class="primary-nav__panel-inner">
+              {% if item.explore_title and item.explore_url %}
+                <a class="primary-nav__explore" href="{{ item.explore_url }}">
+                  {{ item.explore_title }}
+                  {% include 'spectrum:svg-icon' with {
+                    name: 'arrow-right',
+                    size: 20,
+                    modifier: 'primary-nav__explore-icon',
+                  } only %}
+                </a>
+              {% endif %}
+
+              <div class="primary-nav__columns">
+                {% for column in item.columns %}
+                  {% include 'spectrum:mega-menu-column' with {
+                    heading: column.heading,
+                    heading_url: column.heading_url,
+                    links: column.links,
+                  } only %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</nav>

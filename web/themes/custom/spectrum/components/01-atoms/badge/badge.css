@@ -1,0 +1,17 @@
+/* Badge (atom). Values taken from spectrumtech.com: 10px bold uppercase,
+   white on red, 8px padding. */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: fit-content;
+  padding: 8px;
+  background-color: var(--spectrum-accent, #e00034);
+  color: #fff;
+  font-family: var(--spectrum-font, Arial, Helvetica, sans-serif);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}

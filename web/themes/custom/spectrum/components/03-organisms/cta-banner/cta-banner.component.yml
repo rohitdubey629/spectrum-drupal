@@ -1,0 +1,36 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: CTA banner
+group: Organisms
+status: stable
+description: Call-to-action banner above the footer, as on spectrumtech.com — background image, dark centred panel with heading, text and one or more red buttons (two on the live site).
+props:
+  type: object
+  required: [heading]
+  properties:
+    heading:
+      type: string
+      title: Heading
+      examples: ['Ready to transform your wire processing?']
+    heading_tag:
+      type: string
+      title: Heading tag
+      enum: [h2, h3]
+      default: h2
+    links:
+      type: array
+      title: Buttons
+      description: Each item has text and url (Button atom).
+      items:
+        type: object
+        properties:
+          text:
+            type: string
+          url:
+            type: string
+slots:
+  media:
+    title: Background
+    description: Background image (Drupal — the media field), cropped to cover the banner.
+  body:
+    title: Body
+    description: Text under the heading.

@@ -1,0 +1,59 @@
+{#
+/**
+ * @file
+ * Carousel slide — molecule (SDC: spectrum:carousel-slide).
+ *
+ * Props:
+ * - heading: slide title.
+ * - text: description, cut after 2 lines.
+ * - image_url, image_alt: background image (cover).
+ * - cta_text, cta_url: button (Button atom); shown when both are set.
+ * - heading_tag: h3 (default, under the carousel's h2) | h2.
+ *
+ * Built from: Heading atom, Text atom, Button atom.
+ */
+#}
+{# Debug: uncomment to inspect the props this component receives. #}
+{# {{ dump({ heading: heading, text: text, image_url: image_url, cta_text: cta_text, cta_url: cta_url }) }} #}
+
+<div class="carousel-slide">
+  {% if image_url %}
+    <img class="carousel-slide__image" src="{{ image_url }}" alt="{{ image_alt|default('') }}" loading="lazy">
+  {% endif %}
+
+  <div class="carousel-slide__container">
+    <div class="carousel-slide__content">
+      <span class="carousel-slide__line" aria-hidden="true"></span>
+
+      <div class="carousel-slide__text-group">
+        {% include 'spectrum:heading' with {
+          text: heading,
+          tag: heading_tag|default('h3'),
+          size: 'h2',
+          color: 'white',
+          modifier: 'carousel-slide__heading',
+        } only %}
+
+        {% if text %}
+          {% include 'spectrum:text' with {
+            text: text,
+            size: 'large',
+            color: 'white',
+            lines: 2,
+            modifier: 'carousel-slide__text',
+          } only %}
+        {% endif %}
+      </div>
+
+      {% if cta_text and cta_url %}
+        <div class="carousel-slide__cta">
+          {% include 'spectrum:button' with {
+            text: cta_text,
+            url: cta_url,
+            variant: 'primary',
+          } only %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

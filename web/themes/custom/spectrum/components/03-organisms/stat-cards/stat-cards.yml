@@ -1,0 +1,16 @@
+# Storybook sample data for the Stat cards organism (spectrumtech.com homepage).
+# Same shape that templates/block/block--block-content--type--stat-cards.html.twig builds.
+background: grey
+items:
+  - heading: "35+ Years of Innovation"
+    text: "Pioneering laser wire processing technology since 1989."
+    url: "/about-us"
+    narrow_heading: false
+  - heading: "2,000+ Systems Installed"
+    text: "Trusted worldwide for precision, reliability, and performance."
+    url: "/products"
+    narrow_heading: false
+  - heading: "Global Coverage"
+    text: "Supporting customers in over 65 countries through our international network."
+    url: "/locations"
+    narrow_heading: true
